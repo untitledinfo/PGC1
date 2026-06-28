@@ -46,7 +46,14 @@ $('.modal-close',modal).addEventListener('click',()=>modal.close());modal.addEve
 
 // Gallery filters and lightbox
 $$('[data-filter]').forEach(b=>b.addEventListener('click',()=>{$$('[data-filter]').forEach(x=>x.classList.toggle('active',x===b));$$('.gallery-item').forEach(x=>x.hidden=!(b.dataset.filter==='all'||x.dataset.type===b.dataset.filter))}));
-const lightbox=$('.lightbox');$$('.gallery-item').forEach(item=>item.addEventListener('click',()=>{$('.lightbox-image',lightbox).style.backgroundPosition=getComputedStyle(item).backgroundPosition;$('.lightbox h3').textContent=$('span',item).textContent.trim();lightbox.showModal()}));$('.modal-close',lightbox).addEventListener('click',()=>lightbox.close());lightbox.addEventListener('click',e=>{if(e.target===lightbox)lightbox.close()});
+const lightbox=$('.lightbox'), lightboxImage=$('.lightbox-image',lightbox);
+$$('.gallery-item').forEach(item=>item.addEventListener('click',()=>{
+  const img=$('img',item);
+  lightboxImage.innerHTML = img ? `<img src="${img.src}" alt="${img.alt||''}">` : '';
+  $('h3',lightbox).textContent=$('span',item).textContent.trim();
+  lightbox.showModal();
+}));
+$('.modal-close',lightbox).addEventListener('click',()=>lightbox.close());lightbox.addEventListener('click',e=>{if(e.target===lightbox)lightbox.close()});
 
 // Site search
 const search=$('.search-overlay'), input=$('#site-search'), results=$('.search-results');
