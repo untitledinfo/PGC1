@@ -9,14 +9,27 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/untitledinfo/PGC1/main/logo.png">
   <link rel="stylesheet" href="styles.css">
   <script defer src="app.js"></script>
+  <style>
+    /* Logo + gallery image overrides — move into styles.css whenever convenient */
+    .brand-logo{width:40px;height:40px;object-fit:contain;border-radius:8px;flex-shrink:0}
+    .footer-brand .brand-logo{width:36px;height:36px}
+    .gallery-item{position:relative;overflow:hidden}
+    .gallery-item img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;transition:transform .4s ease}
+    .gallery-item:hover img{transform:scale(1.06)}
+    .gallery-item span{position:relative;z-index:1}
+    .gallery-item::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,10,18,0) 40%,rgba(5,10,18,.85) 100%);z-index:0}
+    .discord-orb{overflow:hidden;display:flex;align-items:center;justify-content:center}
+    .discord-orb img{width:60%;height:60%;object-fit:contain}
+  </style>
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
   <div class="noise" aria-hidden="true"></div>
   <header class="nav" id="top">
-    <a class="brand" href="#home" aria-label="PGC home"><span class="brand-cube">P</span><span>PGC<small>Pakistan Gamers</small></span></a>
+    <a class="brand" href="#home" aria-label="PGC home"><img class="brand-logo" src="https://raw.githubusercontent.com/untitledinfo/PGC1/main/logo.png" width="1000" height="1000" alt="PGC logo"><span>PGC<small>Pakistan Gamers</small></span></a>
     <nav class="navlinks" id="navlinks" aria-label="Main navigation">
       <a class="active" href="#home">Home</a><a href="#event">Events</a><a href="#server">Server</a><a href="#community">Community</a><a href="#applications">Applications</a>
     </nav>
@@ -95,7 +108,12 @@
 
     <section class="section gallery" id="gallery">
       <div class="section-head reveal"><div><span class="kicker">FROM THE COMMUNITY</span><h2>PGC IN <em>ACTION</em></h2></div><div class="filter-row"><button class="active" data-filter="all">All</button><button data-filter="events">Events</button><button data-filter="builds">Builds</button><button data-filter="community">Community</button></div></div>
-      <div class="gallery-grid reveal"><button class="gallery-item tall" data-type="builds" aria-label="Open Warrior castle image"><span>WARRIOR CITADEL<small>Community build</small></span></button><button class="gallery-item arena" data-type="events" aria-label="Open PvP finals image"><span>PVP FINALS<small>Sunday Tournament</small></span></button><button class="gallery-item portal" data-type="builds" aria-label="Open portal district image"><span>PORTAL DISTRICT<small>Warrior SMP</small></span></button><button class="gallery-item squad" data-type="community" aria-label="Open community night image"><span>COMMUNITY NIGHT<small>Discord meetup</small></span></button></div>
+      <div class="gallery-grid reveal">
+        <button class="gallery-item tall" data-type="builds" aria-label="Open Warrior castle image"><img src="https://raw.githubusercontent.com/untitledinfo/PGC1/main/logo.png" alt="Warrior Citadel community build" loading="lazy"><span>WARRIOR CITADEL<small>Community build</small></span></button>
+        <button class="gallery-item arena" data-type="events" aria-label="Open PvP finals image"><img src="https://raw.githubusercontent.com/untitledinfo/PGC1/main/logo.png" alt="PvP Finals Sunday Tournament" loading="lazy"><span>PVP FINALS<small>Sunday Tournament</small></span></button>
+        <button class="gallery-item portal" data-type="builds" aria-label="Open portal district image"><img src="https://raw.githubusercontent.com/untitledinfo/PGC1/main/logo.png" alt="Portal District Warrior SMP" loading="lazy"><span>PORTAL DISTRICT<small>Warrior SMP</small></span></button>
+        <button class="gallery-item squad" data-type="community" aria-label="Open community night image"><img src="https://raw.githubusercontent.com/untitledinfo/PGC1/main/logo.png" alt="Community Night Discord meetup" loading="lazy"><span>COMMUNITY NIGHT<small>Discord meetup</small></span></button>
+      </div>
     </section>
 
     <section class="section testimonials">
@@ -105,10 +123,10 @@
 
     <section class="section faq-section" id="faq"><div class="faq-intro reveal"><span class="kicker">NEED TO KNOW</span><h2>FREQUENTLY<br><em>ASKED</em></h2><p>Still stuck? Our support team is one Discord message away.</p><a class="btn btn-ghost" href="#discord">Get support →</a></div><div class="faq reveal"><details open><summary>How do I join the Minecraft server?<span>+</span></summary><p>Open Minecraft 1.20 or newer, add <b>play.pgcmc.fun</b> to your server list, and connect using the Java or Bedrock port shown above.</p></details><details><summary>How do I register for an event?<span>+</span></summary><p>Use any Register button on this page, submit your in-game name and Discord ID, then watch Discord for confirmation.</p></details><details><summary>Can cracked Minecraft accounts join?<span>+</span></summary><p>Account eligibility varies by season. Check the current server rules in Discord before joining.</p></details><details><summary>What are the server rules?<span>+</span></summary><p>No cheating, exploiting, hate speech or targeted harassment. Competitive play is encouraged; toxic behaviour is not.</p></details><details><summary>How do I apply for staff or creator roles?<span>+</span></summary><p>Choose your program above and complete the short application. We review applications weekly.</p></details></div></section>
 
-    <section class="discord" id="discord"><div class="discord-orb">PGC</div><div class="reveal"><span class="kicker">THE CONVERSATION NEVER STOPS</span><h2>YOUR NEXT SQUAD<br>IS <em>WAITING.</em></h2><p>Tournaments, giveaways, support, updates, voice chat—and thousands of Pakistani gamers who get it.</p><a class="btn btn-white" href="https://discord.gg/QtSSJZQD2A" target="_blank" rel="noreferrer"><svg><use href="#i-discord"/></svg> Join the PGC Discord ↗</a></div><div class="discord-widget reveal"><div class="widget-head"><div><span class="live-dot"></span><b>PAKISTAN GAMERS COMMUNITY</b></div><small>discord.gg/pgc</small></div><div class="widget-stats"><span><b>12,400+</b><small>MEMBERS</small></span><span><b>3,287</b><small>ONLINE NOW</small></span></div><div class="online-list"><span><i></i>ArhamKhan <small>Playing Warrior SMP</small></span><span><i></i>ZayanOP <small>In voice • General</small></span><span><i></i>PGC Events <small>Registration open</small></span></div></div></section>
+    <section class="discord" id="discord"><div class="discord-orb"><img src="https://raw.githubusercontent.com/untitledinfo/PGC1/main/logo.png" alt="PGC logo"></div><div class="reveal"><span class="kicker">THE CONVERSATION NEVER STOPS</span><h2>YOUR NEXT SQUAD<br>IS <em>WAITING.</em></h2><p>Tournaments, giveaways, support, updates, voice chat—and thousands of Pakistani gamers who get it.</p><a class="btn btn-white" href="https://discord.gg/QtSSJZQD2A" target="_blank" rel="noreferrer"><svg><use href="#i-discord"/></svg> Join the PGC Discord ↗</a></div><div class="discord-widget reveal"><div class="widget-head"><div><span class="live-dot"></span><b>PAKISTAN GAMERS COMMUNITY</b></div><small>discord.gg/pgc</small></div><div class="widget-stats"><span><b>12,400+</b><small>MEMBERS</small></span><span><b>3,287</b><small>ONLINE NOW</small></span></div><div class="online-list"><span><i></i>ArhamKhan <small>Playing Warrior SMP</small></span><span><i></i>ZayanOP <small>In voice • General</small></span><span><i></i>PGC Events <small>Registration open</small></span></div></div></section>
   </main>
 
-  <footer><div class="footer-brand"><a class="brand" href="#top"><span class="brand-cube">P</span><span>PGC<small>Pakistan Gamers</small></span></a><p>Pakistan's home for competitive gaming, Minecraft and community.</p></div><div><b>EXPLORE</b><a href="#event">Events</a><a href="#server">Servers</a><a href="#gallery">Gallery</a><a href="#faq">Support</a></div><div><b>COMMUNITY</b><a href="#applications">Applications</a><a href="#discord">Discord</a><a href="#leaderboard">Leaderboards</a><a href="#">News</a></div><div><b>LEGAL</b><a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="#">Server Rules</a></div><div class="footer-bottom"><span>© 2026 Pakistan Gamers Community. All rights reserved.</span><span>Made with ♥ in Pakistan 🇵🇰</span></div></footer>
+  <footer><div class="footer-brand"><a class="brand" href="#top"><img class="brand-logo" src="https://raw.githubusercontent.com/untitledinfo/PGC1/main/logo.png" width="1000" height="1000" alt="PGC logo"><span>PGC<small>Pakistan Gamers</small></span></a><p>Pakistan's home for competitive gaming, Minecraft and community.</p></div><div><b>EXPLORE</b><a href="#event">Events</a><a href="#server">Servers</a><a href="#gallery">Gallery</a><a href="#faq">Support</a></div><div><b>COMMUNITY</b><a href="#applications">Applications</a><a href="#discord">Discord</a><a href="#leaderboard">Leaderboards</a><a href="#">News</a></div><div><b>LEGAL</b><a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="#">Server Rules</a></div><div class="footer-bottom"><span>© 2026 Pakistan Gamers Community. All rights reserved.</span><span>Made with ♥ in Pakistan 🇵🇰</span></div></footer>
 
   <button class="back-top" aria-label="Back to top">↑</button>
   <div class="toast" role="status" aria-live="polite"></div>
