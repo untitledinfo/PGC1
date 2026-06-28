@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pakistan Gamers Community | Minecraft & Esports</title>
+    <meta name="description" content="Join thousands of Pakistani gamers in tournaments, Lifesteal SMP, events, giveaways, and an active Discord community.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-theme">
+    <!-- Particles Background -->
+    <div id="tsparticles"></div>
+
+    <!-- Live Announcement Banner -->
+    <div class="announcement-banner">
+        <div class="container banner-content">
+            <span class="pulse-icon">🚨</span>
+            <div class="banner-text">
+                <strong>Event Registration Open!</strong> Win amazing prizes including 🥇 Rs. 10,000 Cash, 🥈 Gaming Headset, 🥉 Minecraft Premium Account.
+            </div>
+            <div class="banner-countdown" id="banner-countdown">00:00:00</div>
+            <a href="#event" class="btn btn-small btn-glow">Register Now</a>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <div class="logo">
+                <span class="logo-text">PGC</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#event">Events</a></li>
+                <li><a href="#smp">Servers</a></li>
+                <li><a href="#applications">Applications</a></li>
+                <li><a href="#faq">FAQ</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button id="theme-toggle" class="icon-btn" aria-label="Toggle Dark Mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <a href="#discord" class="btn btn-discord"><i class="fab fa-discord"></i> Join Discord</a>
+                <button class="mobile-menu-btn" aria-label="Menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="home" class="hero section">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <h1 class="glitch" data-text="Pakistan Gamers Community">Pakistan Gamers Community</h1>
+            <h2 class="subtitle">Pakistan's Biggest Minecraft & Gaming Community</h2>
+            <p class="description">Join thousands of Pakistani gamers in tournaments, Lifesteal SMP, events, giveaways, and an active Discord community.</p>
+            <div class="hero-buttons">
+                <a href="#discord" class="btn btn-glow btn-primary"><i class="fab fa-discord"></i> Join Discord</a>
+                <a href="#event" class="btn btn-glass"><i class="fas fa-ticket-alt"></i> Register for Event</a>
+                <a href="#smp" class="btn btn-glass"><i class="fas fa-gamepad"></i> Play Now</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Minecraft Event Section -->
+    <section id="event" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Sunday Minecraft Tournament</h2>
+                <div class="prize-pool">Prize Pool: <span class="highlight">Rs. 10,000</span></div>
+            </div>
+            
+            <div class="event-grid">
+                <div class="event-card glass-panel">
+                    <div class="status active">Registration Open</div>
+                    <h3>Next Tournament</h3>
+                    <div class="big-countdown" id="event-countdown">
+                        <div class="time-box"><span id="days">00</span><small>Days</small></div>
+                        <div class="time-box"><span id="hours">00</span><small>Hours</small></div>
+                        <div class="time-box"><span id="mins">00</span><small>Mins</small></div>
+                        <div class="time-box"><span id="secs">00</span><small>Secs</small></div>
+                    </div>
+                    <ul class="event-rules">
+                        <li><i class="fas fa-check-circle"></i> Must be in Discord</li>
+                        <li><i class="fas fa-check-circle"></i> No cheating/hacks</li>
+                        <li><i class="fas fa-check-circle"></i> Version 1.20+</li>
+                    </ul>
+                    <a href="#register" class="btn btn-glow btn-full">Register Team</a>
+                </div>
+                
+                <div class="past-champions glass-panel">
+                    <h3>Past Champions</h3>
+                    <div class="champions-list">
+                        <div class="champion">
+                            <img src="https://minotar.net/helm/Notch/64.png" alt="Player">
+                            <div class="champ-info">
+                                <strong>Team Alpha</strong>
+                                <span>Season 4 Winners</span>
+                            </div>
+                        </div>
+                        <div class="champion">
+                            <img src="https://minotar.net/helm/Steve/64.png" alt="Player">
+                            <div class="champ-info">
+                                <strong>Bedwars Gods</strong>
+                                <span>Season 3 Winners</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Warrior Lifesteal SMP -->
+    <section id="smp" class="section alt-bg">
+        <div class="container">
+            <div class="smp-header">
+                <h2>Warrior Lifesteal SMP</h2>
+                <p>The ultimate survival multiplayer experience in Pakistan.</p>
+            </div>
+            
+            <div class="smp-content">
+                <div class="smp-features">
+                    <div class="feature-item glass-panel"><i class="fas fa-heart text-red"></i> <h3>Steal Hearts</h3></div>
+                    <div class="feature-item glass-panel"><i class="fas fa-swords text-blue"></i> <h3>PvP Battles</h3></div>
+                    <div class="feature-item glass-panel"><i class="fas fa-castle text-yellow"></i> <h3>Build Bases</h3></div>
+                    <div class="feature-item glass-panel"><i class="fas fa-box-open text-purple"></i> <h3>Custom Crates</h3></div>
+                </div>
+
+                <div class="server-status-card glass-panel glow-border">
+                    <h3>Server Status</h3>
+                    <div class="status-indicator">
+                        <div class="pulse-dot green"></div> <span id="server-state">Checking...</span>
+                    </div>
+                    <div class="online-players">
+                        <i class="fas fa-users"></i> <span id="player-count">0</span> / <span id="max-players">0</span> Online
+                    </div>
+                    
+                    <div class="ip-boxes">
+                        <div class="ip-box">
+                            <span class="label">Java IP:</span>
+                            <code id="java-ip">play.pgcmc.fun</code>
+                            <button class="copy-btn" data-clipboard="play.pgcmc.fun"><i class="far fa-copy"></i></button>
+                        </div>
+                        <div class="ip-box">
+                            <span class="label">Bedrock IP:</span>
+                            <code>play.pgcmc.fun <br><small>Port: 1054</small></code>
+                            <button class="copy-btn" data-clipboard="play.pgcmc.fun:1054"><i class="far fa-copy"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Applications -->
+    <section id="applications" class="section">
+        <div class="container">
+            <h2 class="section-title text-center">Join the Team</h2>
+            
+            <div class="cards-grid">
+                <!-- Staff Application -->
+                <div class="app-card glass-panel">
+                    <div class="card-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3>Staff Applications</h3>
+                    <ul class="req-list">
+                        <li><i class="fas fa-check"></i> Age 13+</li>
+                        <li><i class="fas fa-check"></i> Facecam & Active Voice Chat</li>
+                        <li><i class="fas fa-check"></i> Discord Management Skills</li>
+                    </ul>
+                    <a href="#" class="btn btn-outline">Apply as Staff</a>
+                </div>
+
+                <!-- Developer Application -->
+                <div class="app-card glass-panel">
+                    <div class="card-icon"><i class="fas fa-code"></i></div>
+                    <h3>Developer Applications</h3>
+                    <ul class="req-list">
+                        <li><i class="fas fa-check"></i> Plugin/Skript Development</li>
+                        <li><i class="fas fa-check"></i> Configuration & Optimization</li>
+                        <li><i class="fas fa-check"></i> Professionalism & Teamwork</li>
+                    </ul>
+                    <a href="#" class="btn btn-outline">Apply as Developer</a>
+                </div>
+
+                <!-- Creator Program -->
+                <div class="app-card glass-panel highlight-card">
+                    <div class="card-icon"><i class="fas fa-video"></i></div>
+                    <h3>Creator Program</h3>
+                    <ul class="req-list">
+                        <li><i class="fas fa-star"></i> Verified Creator Role</li>
+                        <li><i class="fas fa-star"></i> Exclusive Events</li>
+                        <li><i class="fas fa-star"></i> Community Promotion</li>
+                    </ul>
+                    <a href="#" class="btn btn-glow">Become a Creator</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section id="stats" class="section stats-section alt-bg">
+        <div class="container stats-grid">
+            <div class="stat-box glass-panel">
+                <i class="fab fa-discord"></i>
+                <h3 class="counter" data-target="5000">0</h3>
+                <p>Discord Members</p>
+            </div>
+            <div class="stat-box glass-panel">
+                <i class="fas fa-gamepad"></i>
+                <h3 class="counter" data-target="10000">0</h3>
+                <p>Minecraft Players</p>
+            </div>
+            <div class="stat-box glass-panel">
+                <i class="fas fa-trophy"></i>
+                <h3 class="counter" data-target="150">0</h3>
+                <p>Events Hosted</p>
+            </div>
+            <div class="stat-box glass-panel">
+                <i class="fas fa-money-bill-wave"></i>
+                <h3>Rs. <span class="counter" data-target="500000">0</span>+</h3>
+                <p>Cash Prizes Given</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features" class="section">
+        <div class="container">
+            <h2 class="section-title text-center">Server Features</h2>
+            <div class="features-grid">
+                <div class="feat-card"><i class="fas fa-plug"></i><h4>Custom Plugins</h4></div>
+                <div class="feat-card"><i class="fas fa-user-shield"></i><h4>Professional Staff</h4></div>
+                <div class="feat-card"><i class="fas fa-calendar-check"></i><h4>Daily Events</h4></div>
+                <div class="feat-card"><i class="fas fa-server"></i><h4>Fast Servers</h4></div>
+                <div class="feat-card"><i class="fas fa-shield-virus"></i><h4>DDoS Protection</h4></div>
+                <div class="feat-card"><i class="fas fa-users"></i><h4>Friendly Community</h4></div>
+                <div class="feat-card"><i class="fas fa-headset"></i><h4>24/7 Support</h4></div>
+                <div class="feat-card"><i class="fas fa-network-wired"></i><h4>Crossplay</h4></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="section alt-bg">
+        <div class="container">
+            <h2 class="section-title text-center">Frequently Asked Questions</h2>
+            <div class="faq-container">
+                <div class="faq-item glass-panel">
+                    <button class="faq-btn">How to Join the SMP? <i class="fas fa-chevron-down"></i></button>
+                    <div class="faq-content"><p>Copy the IP play.pgcmc.fun and add it to your Minecraft multiplayer servers. We support both Java and Bedrock editions!</p></div>
+                </div>
+                <div class="faq-item glass-panel">
+                    <button class="faq-btn">How to Register for Tournaments? <i class="fas fa-chevron-down"></i></button>
+                    <div class="faq-content"><p>Join our Discord server and navigate to the #events channel to find registration links and forms.</p></div>
+                </div>
+                <div class="faq-item glass-panel">
+                    <button class="faq-btn">What are the Server Rules? <i class="fas fa-chevron-down"></i></button>
+                    <div class="faq-content"><p>No hacking, exploiting, or extreme toxicity. Read the full rules channel on our Discord for details.</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Discord Section -->
+    <section id="discord" class="section discord-section">
+        <div class="container">
+            <div class="discord-card glass-panel glow-border-blue">
+                <div class="discord-info">
+                    <h2>Join Pakistan Gamers Community</h2>
+                    <p>Connect with thousands of players, participate in voice channels, and get the latest news.</p>
+                    <div class="discord-stats">
+                        <span class="online"><span class="dot"></span> <span id="discord-online">850</span> Online</span>
+                        <span class="total"><span class="dot gray"></span> <span id="discord-total">5000</span> Members</span>
+                    </div>
+                    <a href="#" class="btn btn-discord btn-glow">Join Server</a>
+                </div>
+                <!-- Optional Discord Widget iframe can be placed here if an ID is provided -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-about">
+                <h3>PGC</h3>
+                <p>Pakistan's Biggest Minecraft & Gaming Community. Providing premium esports experiences.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#event">Events</a></li>
+                    <li><a href="#smp">Servers</a></li>
+                    <li><a href="#applications">Applications</a></li>
+                </ul>
+            </div>
+            <div class="footer-social">
+                <h4>Follow Us</h4>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                    <a href="#"><i class="fab fa-discord"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Copyright © 2026 Pakistan Gamers Community. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Back to top -->
+    <button id="back-to-top" class="glass-panel"><i class="fas fa-arrow-up"></i></button>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles-engine@2.12.0/tsparticles.engine.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles-preset-stars@2.12.0/tsparticles.preset.stars.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
