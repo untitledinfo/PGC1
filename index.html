@@ -24,9 +24,9 @@
     <!-- Live Announcement Banner -->
     <div class="announcement-banner">
         <div class="container banner-content">
-            <span class="pulse-icon">🚨</span>
+            <span class="pulse-icon"><i class="fas fa-exclamation-circle" style="color: #ff4757;"></i></span>
             <div class="banner-text">
-                <strong>Event Registration Open!</strong> Win amazing prizes including 🥇 Rs. 10,000 Cash, 🥈 Gaming Headset, 🥉 Minecraft Premium Account.
+                <strong>Event Registration Open!</strong> Win amazing prizes including <i class="fas fa-medal" style="color: #ffd700;"></i> Rs. 10,000 Cash, <i class="fas fa-medal" style="color: #c0c0c0;"></i> Gaming Headset, <i class="fas fa-medal" style="color: #cd7f32;"></i> Minecraft Premium Account.
             </div>
             <div class="banner-countdown" id="banner-countdown">00:00:00</div>
             <a href="#event" class="btn btn-small btn-glow">Register Now</a>
@@ -50,7 +50,10 @@
                 <button id="theme-toggle" class="icon-btn" aria-label="Toggle Dark Mode">
                     <i class="fas fa-moon"></i>
                 </button>
-                <a href="#discord" class="btn btn-discord"><i class="fab fa-discord"></i> Join Discord</a>
+                <a href="https://github.com/pgc" target="_blank" class="icon-btn" aria-label="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://discord.gg/QtSSJZQD2A" target="_blank" class="btn btn-discord"><i class="fab fa-discord"></i> Join Discord</a>
                 <button class="mobile-menu-btn" aria-label="Menu">
                     <i class="fas fa-bars"></i>
                 </button>
@@ -66,7 +69,7 @@
             <h2 class="subtitle">Pakistan's Biggest Minecraft & Gaming Community</h2>
             <p class="description">Join thousands of Pakistani gamers in tournaments, Lifesteal SMP, events, giveaways, and an active Discord community.</p>
             <div class="hero-buttons">
-                <a href="#discord" class="btn btn-glow btn-primary"><i class="fab fa-discord"></i> Join Discord</a>
+                <a href="https://discord.gg/QtSSJZQD2A" target="_blank" class="btn btn-glow btn-primary"><i class="fab fa-discord"></i> Join Discord</a>
                 <a href="#event" class="btn btn-glass"><i class="fas fa-ticket-alt"></i> Register for Event</a>
                 <a href="#smp" class="btn btn-glass"><i class="fas fa-gamepad"></i> Play Now</a>
             </div>
@@ -179,7 +182,7 @@
                         <li><i class="fas fa-check"></i> Facecam & Active Voice Chat</li>
                         <li><i class="fas fa-check"></i> Discord Management Skills</li>
                     </ul>
-                    <a href="#" class="btn btn-outline">Apply as Staff</a>
+                    <a href="https://discord.gg/QtSSJZQD2A" target="_blank" class="btn btn-outline">Apply as Staff</a>
                 </div>
 
                 <!-- Developer Application -->
@@ -191,7 +194,7 @@
                         <li><i class="fas fa-check"></i> Configuration & Optimization</li>
                         <li><i class="fas fa-check"></i> Professionalism & Teamwork</li>
                     </ul>
-                    <a href="#" class="btn btn-outline">Apply as Developer</a>
+                    <a href="https://discord.gg/QtSSJZQD2A" target="_blank" class="btn btn-outline">Apply as Developer</a>
                 </div>
 
                 <!-- Creator Program -->
@@ -203,7 +206,7 @@
                         <li><i class="fas fa-star"></i> Exclusive Events</li>
                         <li><i class="fas fa-star"></i> Community Promotion</li>
                     </ul>
-                    <a href="#" class="btn btn-glow">Become a Creator</a>
+                    <a href="https://discord.gg/QtSSJZQD2A" target="_blank" class="btn btn-glow">Become a Creator</a>
                 </div>
             </div>
         </div>
@@ -284,7 +287,7 @@
                         <span class="online"><span class="dot"></span> <span id="discord-online">850</span> Online</span>
                         <span class="total"><span class="dot gray"></span> <span id="discord-total">5000</span> Members</span>
                     </div>
-                    <a href="#" class="btn btn-discord btn-glow">Join Server</a>
+                    <a href="https://discord.gg/QtSSJZQD2A" target="_blank" class="btn btn-discord btn-glow">Join Server</a>
                 </div>
                 <!-- Optional Discord Widget iframe can be placed here if an ID is provided -->
             </div>
@@ -313,7 +316,8 @@
                     <a href="#"><i class="fab fa-youtube"></i></a>
                     <a href="#"><i class="fab fa-instagram"></i></a>
                     <a href="#"><i class="fab fa-tiktok"></i></a>
-                    <a href="#"><i class="fab fa-discord"></i></a>
+                    <a href="https://discord.gg/QtSSJZQD2A" target="_blank"><i class="fab fa-discord"></i></a>
+                    <a href="https://github.com/pgc" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
                 </div>
             </div>
         </div>
@@ -324,6 +328,31 @@
 
     <!-- Back to top -->
     <button id="back-to-top" class="glass-panel"><i class="fas fa-arrow-up"></i></button>
+
+    <!-- Registration Modal -->
+    <div id="register-modal" class="modal">
+        <div class="modal-content glass-panel">
+            <span class="close-modal">&times;</span>
+            <h2>Tournament Registration</h2>
+            <p>Register your team for the Sunday Minecraft Tournament.</p>
+            <form action="https://formsubmit.co/sajjadcas32@gmail.com" method="POST" class="register-form">
+                <input type="hidden" name="_subject" value="New Tournament Registration!">
+                <div class="form-group">
+                    <label>Team Name</label>
+                    <input type="text" name="team_name" required placeholder="Enter team name">
+                </div>
+                <div class="form-group">
+                    <label>Leader Discord Username</label>
+                    <input type="text" name="discord_username" required placeholder="User#1234">
+                </div>
+                <div class="form-group">
+                    <label>Minecraft IGNs (Comma separated)</label>
+                    <textarea name="minecraft_igns" required placeholder="Player1, Player2, Player3..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-glow btn-full">Submit Registration</button>
+            </form>
+        </div>
+    </div>
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/tsparticles-engine@2.12.0/tsparticles.engine.min.js"></script>
