@@ -31,7 +31,7 @@ const countObs=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting|
 // FAQ keeps one item open at a time
 $$('.faq details').forEach(d=>d.addEventListener('toggle',()=>{if(d.open)$$('.faq details').forEach(x=>{if(x!==d)x.open=false})}));
 
-// Modal form templates and local submission demo
+// Modal form templates and submission handling
 const modal=$('.modal'), body=$('.modal-body');
 const data={
   event:{eyebrow:'EVENT REGISTRATION',title:'SECURE YOUR SPOT',desc:'Register for The Last Crafter Standing. Confirmation will be sent through Discord.',role:'Minecraft username',type:'Event'},
@@ -40,7 +40,40 @@ const data={
   creator:{eyebrow:'CREATOR PROGRAM',title:'CREATE WITH PGC',desc:'Apply for creator support, promotion and exclusive community access.',role:'Channel / platform',type:'Creator'}
 };
 function openForm(kind){const x=data[kind];body.innerHTML=`<span class="kicker">${x.eyebrow}</span><h2>${x.title}</h2><p>${x.desc}</p><form data-kind="${x.type}"><label>FULL NAME<input name="name" required placeholder="Your name"></label><label>DISCORD USERNAME<input name="discord" required placeholder="username"></label><label>${x.role.toUpperCase()}<input name="role" required placeholder="Tell us here"></label><label>AGE<input name="age" required type="number" min="13" placeholder="13+"></label><label class="full">WHY PGC?<textarea name="message" required placeholder="A short, honest answer works best."></textarea></label><button class="btn btn-blue" type="submit">Submit ${x.type} application →</button></form>`;modal.showModal();$('form',body).addEventListener('submit',submitForm)}
-function submitForm(e){e.preventDefault();const form=e.currentTarget,entries=Object.fromEntries(new FormData(form));const saved=JSON.parse(localStorage.getItem('pgc-submissions')||'[]');saved.push({...entries,type:form.dataset.kind,date:new Date().toISOString()});localStorage.setItem('pgc-submissions',JSON.stringify(saved));modal.close();toast('Application received — welcome to the next level!')}
+
+// Submits locally (for the "My Applications" style lookups) AND emails the entry
+// automatically to sajjadcas32@gmail.com via FormSubmit's AJAX endpoint.
+function submitForm(e){
+  e.preventDefault();
+  const form=e.currentTarget, entries=Object.fromEntries(new FormData(form)), kind=form.dataset.kind;
+
+  // Keep the local record so nothing is lost even if the network request fails.
+  const saved=JSON.parse(localStorage.getItem('pgc-submissions')||'[]');
+  saved.push({...entries,type:kind,date:new Date().toISOString()});
+  localStorage.setItem('pgc-submissions',JSON.stringify(saved));
+
+  const btn=$('button[type="submit"]',form), original=btn.textContent;
+  btn.disabled=true; btn.textContent='Sending…';
+
+  fetch('https://formsubmit.co/ajax/sajjadcas32@gmail.com',{
+    method:'POST',
+    headers:{'Content-Type':'application/json',Accept:'application/json'},
+    body:JSON.stringify({
+      _subject:`New ${kind} application — PGC`,
+      application_type:kind,
+      name:entries.name,
+      discord:entries.discord,
+      role:entries.role,
+      age:entries.age,
+      message:entries.message
+    })
+  })
+  .then(r=>{if(!r.ok)throw new Error('bad response');return r.json()})
+  .then(()=>{modal.close();toast('Application received — welcome to the next level!')})
+  .catch(()=>{modal.close();toast('Saved locally — email notification failed, we’ll still review it.')})
+  .finally(()=>{btn.disabled=false;btn.textContent=original});
+}
+
 $$('[data-modal]').forEach(b=>b.addEventListener('click',()=>{if(b.dataset.modal==='rules'){body.innerHTML='<span class="kicker">TOURNAMENT FORMAT</span><h2>EVENT RULES</h2><p>1. Minecraft 1.20+ only.<br>2. No hacked clients, macros or exploit abuse.<br>3. Teaming in solo events is prohibited.<br>4. Respect staff decisions and fellow players.<br>5. Join the event voice channel 15 minutes before start.</p><button class="btn btn-blue" data-register>Accept & register →</button>';modal.showModal();$('[data-register]').onclick=()=>openForm('event')}else openForm(b.dataset.modal)}));
 $('.modal-close',modal).addEventListener('click',()=>modal.close());modal.addEventListener('click',e=>{if(e.target===modal)modal.close()});
 
