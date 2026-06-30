@@ -20,8 +20,8 @@ const target=nextEvent();
 function tick(){let n=Math.max(0,target-Date.now());const d=Math.floor(n/864e5);n%=864e5;const h=Math.floor(n/36e5);n%=36e5;const m=Math.floor(n/6e4);$$('[data-days]').forEach(x=>x.textContent=String(d).padStart(2,'0'));$$('[data-hours]').forEach(x=>x.textContent=String(h).padStart(2,'0'));$$('[data-minutes]').forEach(x=>x.textContent=String(m).padStart(2,'0'))} tick();setInterval(tick,30000);
 
 // Server panel and clipboard
-const editions={java:{ip:'play.pgcmc.fun',port:'25568'},bedrock:{ip:'play.pgcmc.fun',port:'1054'}};let edition='java';
-$$('[data-edition]').forEach(b=>b.addEventListener('click',()=>{edition=b.dataset.edition;$$('[data-edition]').forEach(x=>x.classList.toggle('active',x===b));$('[data-ip]').textContent=editions[edition].ip;$('[data-port]').textContent=editions[edition].port}));
+const editions={java:{ip:'me-01.diamondhost.online',port:'25568'},bedrock:{ip:'me-01.diamondhost.online',port:'25568'}};let edition='java';
+$$('[data-edition]').forEach(b=>b.addEventListener('click',()=>{edition=b.dataset.edition;$$('[data-edition]').forEach(x=>x.classList.toggle('active',x===b));$('[data-ip]').textContent=editions[edition].ip;$('[data-port]').textContent=editions[edition].port;checkServerStatus()}));
 function toast(msg){const el=$('.toast');el.textContent=msg;el.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>el.classList.remove('show'),2300)}
 $$('[data-copy]').forEach(b=>b.addEventListener('click',async()=>{const value=`${editions[edition].ip}:${editions[edition].port}`;try{await navigator.clipboard.writeText(value);toast(`${edition.toUpperCase()} address copied: ${value}`)}catch{toast(`Server: ${value}`)}}));
 
@@ -95,5 +95,36 @@ $('.search-toggle').onclick=()=>toggleSearch(true);$('.search-close').onclick=()
 const pages=[['Events','Sunday Tournament, prizes and registration','#event'],['Warrior Lifesteal SMP','Java and Bedrock server details','#server'],['Applications','Staff, developer and creator programs','#applications'],['Gallery','Builds and community moments','#gallery'],['Support','Frequently asked questions','#faq'],['Discord','Join the PGC Discord community','#discord']];
 input.addEventListener('input',()=>{const q=input.value.toLowerCase().trim();const found=q?pages.filter(x=>x.join(' ').toLowerCase().includes(q)):[];results.innerHTML=found.length?found.map(x=>`<a href="${x[2]}"><b>${x[0]}</b> — ${x[1]}</a>`).join('<br><br>'):q?'No matches yet. Try “server” or “applications”.':'Press / anywhere to search quickly.';$$('a',results).forEach(a=>a.onclick=()=>toggleSearch(false))});input.dispatchEvent(new Event('input'));
 
-// Lightweight simulated live server variation; ready to swap for a status API.
-setInterval(()=>{$$('[data-server-count]').forEach(x=>x.textContent=String(835+Math.floor(Math.random()*25)))},10000);
+// Live server status: online/offline, real player count and ping —
+// pulled from the public Minecraft Server Status API (api.mcsrvstat.us),
+// the same protocol-aware service used by most third-party server listings.
+// "Ping" here is the round-trip time of the status check itself (the
+// fastest measurement a browser can take); it isn't the in-game ping you'd
+// see from inside Minecraft, but it's a fair, honest live latency reading.
+async function checkServerStatus(){
+  const {ip,port}=editions[edition];
+  const endpoint=(edition==='bedrock'?'https://api.mcsrvstat.us/bedrock/3/':'https://api.mcsrvstat.us/3/')+`${ip}:${port}`;
+  $$('[data-status-label]').forEach(x=>x.textContent='CHECKING');
+  const started=performance.now();
+  try{
+    const res=await fetch(endpoint,{headers:{Accept:'application/json'}});
+    const ping=Math.round(performance.now()-started);
+    if(!res.ok)throw new Error('status check failed');
+    const json=await res.json();
+    renderServerStatus(json.online===true,json.players?.online,ping);
+  }catch{
+    renderServerStatus(false,null,null);
+  }
+}
+function renderServerStatus(online,players,ping){
+  $$('[data-status-dot]').forEach(x=>x.classList.toggle('offline',!online));
+  $$('[data-status-label]').forEach(x=>x.textContent=online?'ONLINE':'OFFLINE');
+  $$('[data-server-count]').forEach(x=>x.textContent=online&&players!=null?players.toLocaleString():'—');
+  $$('[data-server-ping]').forEach(x=>x.textContent=online&&ping!=null?`${ping}ms`:'—');
+  const pillText=$('[data-status-text]');
+  if(pillText)pillText.textContent=online?`Online${players!=null?` • ${players.toLocaleString()} players`:''}`:'Offline';
+  const pill=$('[data-status-pill]');
+  if(pill)pill.classList.toggle('offline',!online);
+}
+checkServerStatus();
+setInterval(checkServerStatus,60000);
