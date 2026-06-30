@@ -20,7 +20,7 @@ const target=nextEvent();
 function tick(){let n=Math.max(0,target-Date.now());const d=Math.floor(n/864e5);n%=864e5;const h=Math.floor(n/36e5);n%=36e5;const m=Math.floor(n/6e4);$$('[data-days]').forEach(x=>x.textContent=String(d).padStart(2,'0'));$$('[data-hours]').forEach(x=>x.textContent=String(h).padStart(2,'0'));$$('[data-minutes]').forEach(x=>x.textContent=String(m).padStart(2,'0'))} tick();setInterval(tick,30000);
 
 // Server panel and clipboard
-const editions={java:{ip:'me-01.diamondhost.online', 'port:'25568'},bedrock:{ip:'me-01.diamondhost.online', 'port:'25568'}};let edition='java';
+const editions={java:{ip:'me-01.diamondhost.online',port:'25568'},bedrock:{ip:'me-01.diamondhost.online',port:'25568'}};let edition='java';
 $$('[data-edition]').forEach(b=>b.addEventListener('click',()=>{edition=b.dataset.edition;$$('[data-edition]').forEach(x=>x.classList.toggle('active',x===b));$('[data-ip]').textContent=editions[edition].ip;$('[data-port]').textContent=editions[edition].port;checkServerStatus()}));
 function toast(msg){const el=$('.toast');el.textContent=msg;el.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>el.classList.remove('show'),2300)}
 $$('[data-copy]').forEach(b=>b.addEventListener('click',async()=>{const value=`${editions[edition].ip}:${editions[edition].port}`;try{await navigator.clipboard.writeText(value);toast(`${edition.toUpperCase()} address copied: ${value}`)}catch{toast(`Server: ${value}`)}}));
