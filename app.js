@@ -42,7 +42,7 @@ const data={
 function openForm(kind){const x=data[kind];body.innerHTML=`<span class="kicker">${x.eyebrow}</span><h2>${x.title}</h2><p>${x.desc}</p><form data-kind="${x.type}"><label>FULL NAME<input name="name" required placeholder="Your name"></label><label>DISCORD USERNAME<input name="discord" required placeholder="username"></label><label>${x.role.toUpperCase()}<input name="role" required placeholder="Tell us here"></label><label>AGE<input name="age" required type="number" min="13" placeholder="13+"></label><label class="full">WHY PGC?<textarea name="message" required placeholder="A short, honest answer works best."></textarea></label><button class="btn btn-blue" type="submit">Submit ${x.type} application →</button></form>`;modal.showModal();$('form',body).addEventListener('submit',submitForm)}
 
 // Submits locally (for the "My Applications" style lookups) AND emails the entry
-// automatically to sajjadcas32@gmail.com via FormSubmit's AJAX endpoint.
+// automatically to farhanbluetick@gmail.com via FormSubmit's AJAX endpoint.
 function submitForm(e){
   e.preventDefault();
   const form=e.currentTarget, entries=Object.fromEntries(new FormData(form)), kind=form.dataset.kind;
@@ -55,7 +55,7 @@ function submitForm(e){
   const btn=$('button[type="submit"]',form), original=btn.textContent;
   btn.disabled=true; btn.textContent='Sending…';
 
-  fetch('https://formsubmit.co/ajax/sajjadcas32@gmail.com',{
+  fetch('https://formsubmit.co/ajax/farhanbluetick@gmail.com',{
     method:'POST',
     headers:{'Content-Type':'application/json',Accept:'application/json'},
     body:JSON.stringify({
