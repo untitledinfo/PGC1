@@ -28,6 +28,49 @@ $$('[data-copy]').forEach(b=>b.addEventListener('click',async()=>{const value=`$
 // Counters
 const countObs=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting||e.target.dataset.done)return;e.target.dataset.done=1;const end=+e.target.dataset.counter,start=performance.now(),dur=1500,prefix=e.target.dataset.prefix||'';function go(t){const p=Math.min(1,(t-start)/dur),v=Math.floor(end*(1-Math.pow(1-p,3)));e.target.textContent=prefix+v.toLocaleString();if(p<1)requestAnimationFrame(go);else e.target.textContent=prefix+end.toLocaleString()};requestAnimationFrame(go)}));$$('[data-counter]').forEach(el=>countObs.observe(el));
 
+// Live Discord data — real member count, online count & online member list
+const DISCORD_INVITE='qnHJZddjTW';
+const statusColor={online:'#41d992',idle:'#f0b23c',dnd:'#ff4d5e',streaming:'#a970ff'};
+function animateNumber(el,end){if(!el)return;const start=performance.now(),dur=1200,from=+(el.dataset.done?el.textContent.replace(/[^0-9]/g,''):0)||0;function go(t){const p=Math.min(1,(t-start)/dur),v=Math.floor(from+(end-from)*(1-Math.pow(1-p,3)));el.textContent=v.toLocaleString();if(p<1)requestAnimationFrame(go);else el.textContent=end.toLocaleString()}el.dataset.done=1;requestAnimationFrame(go)}
+function renderOnlineList(members){
+  const box=$('#onlineList'); if(!box)return;
+  if(!members||!members.length){box.innerHTML='<span><i style="background:#668f79"></i>Online list hidden <small>Enable "Server Widget" in Discord to show live members</small></span>';return}
+  box.innerHTML=members.slice(0,8).map(m=>{
+    const activity=m.game?.name?`Playing ${m.game.name}`:(m.status==='dnd'?'Do not disturb':m.status==='idle'?'Idle':'Online now');
+    const color=statusColor[m.status]||statusColor.online;
+    const name=(m.username||'Member').replace(/</g,'&lt;');
+    return `<span><i style="background:${color};box-shadow:0 0 8px ${color}"></i>${name} <small>${activity}</small></span>`;
+  }).join('');
+}
+async function loadDiscordLive(){
+  const memberStat=$('#statDiscordMembers'), widgetMembers=$('#widgetMemberCount'), widgetOnline=$('#widgetOnlineCount'), liveDot=$('#discordLiveDot');
+  try{
+    const inviteRes=await fetch(`https://discord.com/api/v10/invites/${DISCORD_INVITE}?with_counts=true&with_expiration=true`);
+    if(!inviteRes.ok)throw new Error('invite fetch failed');
+    const invite=await inviteRes.json();
+    const memberCount=invite.approximate_member_count ?? 0;
+    const onlineCount=invite.approximate_presence_count ?? 0;
+    if(memberStat){memberStat.dataset.counter=memberCount;if(memberStat.dataset.done)animateNumber(memberStat,memberCount);else countObs.observe(memberStat)}
+    animateNumber(widgetMembers,memberCount);
+    animateNumber(widgetOnline,onlineCount);
+    if(liveDot)liveDot.classList.remove('offline');
+    // Try to pull the live online member list — requires the server's Widget to be enabled (Server Settings → Widget)
+    const guildId=invite.guild?.id;
+    if(guildId){
+      try{
+        const widgetRes=await fetch(`https://discord.com/api/guilds/${guildId}/widget.json`);
+        if(widgetRes.ok){const widget=await widgetRes.json();renderOnlineList(widget.members)}
+        else renderOnlineList(null);
+      }catch{renderOnlineList(null)}
+    }else renderOnlineList(null);
+  }catch(err){
+    if(liveDot)liveDot.classList.add('offline');
+    const box=$('#onlineList'); if(box)box.innerHTML='<span><i style="background:#ff4d5e"></i>Live data unavailable <small>Join the Discord to see current members</small></span>';
+  }
+}
+loadDiscordLive();
+setInterval(loadDiscordLive,60000);
+
 // FAQ keeps one item open at a time
 $$('.faq details').forEach(d=>d.addEventListener('toggle',()=>{if(d.open)$$('.faq details').forEach(x=>{if(x!==d)x.open=false})}));
 
