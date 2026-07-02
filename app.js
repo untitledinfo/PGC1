@@ -55,10 +55,11 @@ addEventListener('scroll',()=>{
 },{passive:true});
 $('.back-top').addEventListener('click',()=>scrollTo({top:0,behavior:'smooth'}));
 
-// Countdown lands on the next Sunday at 8 PM PKT.
+// Countdown lands on the next Sunday at 8 PM PKT — recomputed each tick so it
+// automatically rolls to the following week once the current event starts
+// (previously it froze at 00:00:00 until the page was reloaded).
 function nextEvent(){const now=new Date(), target=new Date(now); target.setHours(20,0,0,0); const add=(7-now.getDay())%7;if(add===0&&now>=target)target.setDate(target.getDate()+7);else target.setDate(target.getDate()+add);return target}
-const target=nextEvent();
-function tick(){let n=Math.max(0,target-Date.now());const d=Math.floor(n/864e5);n%=864e5;const h=Math.floor(n/36e5);n%=36e5;const m=Math.floor(n/6e4);$$('[data-days]').forEach(x=>x.textContent=String(d).padStart(2,'0'));$$('[data-hours]').forEach(x=>x.textContent=String(h).padStart(2,'0'));$$('[data-minutes]').forEach(x=>x.textContent=String(m).padStart(2,'0'))} tick();setInterval(tick,30000);
+function tick(){let n=Math.max(0,nextEvent()-Date.now());const d=Math.floor(n/864e5);n%=864e5;const h=Math.floor(n/36e5);n%=36e5;const m=Math.floor(n/6e4);$$('[data-days]').forEach(x=>x.textContent=String(d).padStart(2,'0'));$$('[data-hours]').forEach(x=>x.textContent=String(h).padStart(2,'0'));$$('[data-minutes]').forEach(x=>x.textContent=String(m).padStart(2,'0'))} tick();setInterval(tick,30000);
 
 // Server panel and clipboard
 const editions={java:{ip:'me-01.diamondhost.online',port:'25568'},bedrock:{ip:'me-01.diamondhost.online',port:'25568'}};let edition='java';
@@ -208,12 +209,12 @@ async function checkServerStatus(){
     const ping=Math.round(performance.now()-started);
     if(!res.ok)throw new Error('status check failed');
     const json=await res.json();
-    renderServerStatus(json.online===true,json.players?.online,ping);
+    renderServerStatus(json.online===true,json.players?.online,ping,json.players?.max);
   }catch{
-    renderServerStatus(false,null,null);
+    renderServerStatus(false,null,null,null);
   }
 }
-function renderServerStatus(online,players,ping){
+function renderServerStatus(online,players,ping,max){
   $$('[data-status-dot]').forEach(x=>x.classList.toggle('offline',!online));
   $$('[data-status-label]').forEach(x=>x.textContent=online?'ONLINE':'OFFLINE');
   $$('[data-server-count]').forEach(x=>x.textContent=online&&players!=null?players.toLocaleString():'—');
@@ -222,6 +223,20 @@ function renderServerStatus(online,players,ping){
   if(pillText)pillText.textContent=online?`Online${players!=null?` • ${players.toLocaleString()} players`:''}`:'Offline';
   const pill=$('[data-status-pill]');
   if(pill)pill.classList.toggle('offline',!online);
+
+  // Player-capacity bar: fills to show how close the server is to its slot limit
+  const bar=$('[data-player-bar]'), fill=$('[data-player-bar-fill]'), label=$('[data-player-bar-label]');
+  if(bar){
+    if(online&&players!=null&&max){
+      bar.hidden=false;
+      const pct=Math.min(100,Math.round((players/max)*100));
+      fill.style.width=`${pct}%`;
+      fill.style.background=pct>=90?'linear-gradient(90deg,#ff9f43,#ff4d5e)':'linear-gradient(90deg,var(--blue),var(--cyan))';
+      label.textContent=`${players.toLocaleString()} / ${max.toLocaleString()}`;
+    }else{
+      bar.hidden=true;
+    }
+  }
 }
 checkServerStatus();
 setInterval(checkServerStatus,60000);

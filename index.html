@@ -28,18 +28,6 @@
   <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/untitledinfo/PGC1/main/logo.png">
   <link rel="stylesheet" href="styles.css">
   <script defer src="app.js"></script>
-  <style>
-    /* Logo + gallery image overrides — move into styles.css whenever convenient */
-    .brand-logo{width:40px;height:40px;object-fit:contain;border-radius:8px;flex-shrink:0}
-    .footer-brand .brand-logo{width:36px;height:36px}
-    .gallery-item{position:relative;overflow:hidden}
-    .gallery-item img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;transition:transform .4s ease}
-    .gallery-item:hover img{transform:scale(1.06)}
-    .gallery-item span{position:relative;z-index:1}
-    .gallery-item::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,10,18,0) 40%,rgba(5,10,18,.85) 100%);z-index:0}
-    .discord-orb{overflow:hidden;display:flex;align-items:center;justify-content:center}
-    .discord-orb img{width:60%;height:60%;object-fit:contain}
-  </style>
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
@@ -79,7 +67,7 @@
 
     <section class="announcement" id="announcement">
       <div><span class="live-dot"></span><b>REGISTRATION OPEN</b><p>Sunday Minecraft Tournament</p></div>
-      <div class="prizes"><span><b>🥇 Rs. 10,000</b> Cash prize</span><span><b>🥈 Gaming Headset</b> Runner-up</span><span><b>🥉 Premium Account</b> Third place</span></div>
+      <div class="prizes"><div class="prizes-track"><span><b>🥇 Rs. 10,000</b> Cash prize</span><span><b>🥈 Gaming Headset</b> Runner-up</span><span><b>🥉 Premium Account</b> Third place</span><span><b>🥇 Rs. 10,000</b> Cash prize</span><span><b>🥈 Gaming Headset</b> Runner-up</span><span><b>🥉 Premium Account</b> Third place</span></div></div>
       <div class="mini-countdown" data-countdown><span><b data-days>06</b>DAYS</span><i>:</i><span><b data-hours>18</b>HRS</span><i>:</i><span><b data-minutes>42</b>MIN</span></div>
       <button class="btn btn-white btn-sm" data-modal="event">Register now →</button>
     </section>
@@ -97,7 +85,7 @@
 
     <section class="section server" id="server">
       <div class="server-glow"></div>
-      <div class="server-intro reveal"><span class="kicker">PGC EXCLUSIVE SERVER</span><h2>WARRIOR<br><em>LIFESTEAL</em> SMP</h2><p>Every fight matters. Every heart counts. Build your legacy in Pakistan's most competitive crossplay survival world.</p><div class="server-numbers" data-server-status><div><span class="pulse" data-status-dot></span><b data-status-label>CHECKING</b></div><div><strong data-server-count>—</strong><small>PLAYERS</small></div><div><strong data-server-ping>—</strong><small>PING</small></div></div></div>
+      <div class="server-intro reveal"><span class="kicker">PGC EXCLUSIVE SERVER</span><h2>WARRIOR<br><em>LIFESTEAL</em> SMP</h2><p>Every fight matters. Every heart counts. Build your legacy in Pakistan's most competitive crossplay survival world.</p><div class="server-numbers" data-server-status><div><span class="pulse" data-status-dot></span><b data-status-label>CHECKING</b></div><div><strong data-server-count>—</strong><small>PLAYERS</small></div><div><strong data-server-ping>—</strong><small>PING</small></div></div><div class="player-bar" data-player-bar hidden><div class="player-bar-track"><div class="player-bar-fill" data-player-bar-fill></div></div><div class="player-bar-label"><span>SLOTS FILLED</span><b data-player-bar-label>— / —</b></div></div></div>
       <div class="server-panel reveal delay">
         <div class="panel-tabs"><button class="active" data-edition="java">JAVA EDITION</button><button data-edition="bedrock">BEDROCK</button></div>
         <span class="panel-label">SERVER ADDRESS</span><div class="ip-box"><div><small>IP ADDRESS</small><b data-ip>play.pgcmc.fun</b></div><div><small>PORT</small><b data-port>25568</b></div><button class="copy" data-copy aria-label="Copy server address"><svg><use href="#i-copy"/></svg></button></div>
