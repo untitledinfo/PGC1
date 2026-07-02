@@ -4,8 +4,49 @@ const $=(s,c=document)=>c.querySelector(s), $$=(s,c=document)=>[...c.querySelect
 const nav=$('.nav'), menu=$('.menu'), navlinks=$('.navlinks');
 menu.addEventListener('click',()=>{const open=navlinks.classList.toggle('open');menu.setAttribute('aria-expanded',open)});
 $$('.navlinks a').forEach(a=>a.addEventListener('click',()=>navlinks.classList.remove('open')));
-const revealObs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.12});
+const revealObs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');revealObs.unobserve(e.target)}}),{threshold:.12});
 $$('.reveal').forEach(el=>revealObs.observe(el));
+
+// Scroll progress bar
+const scrollProgress=document.createElement('div');scrollProgress.className='scroll-progress';document.body.appendChild(scrollProgress);
+function updateScrollProgress(){const h=document.documentElement;const max=h.scrollHeight-h.clientHeight;scrollProgress.style.width=(max>0?(h.scrollTop/max)*100:0)+'%'}
+addEventListener('scroll',updateScrollProgress,{passive:true});updateScrollProgress();
+
+const reduceMotion=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const hasHover=matchMedia('(hover: hover)').matches;
+
+// Cursor glow — soft trailing light on desktop pointers only
+if(!reduceMotion&&hasHover){
+  const glow=document.createElement('div');glow.className='cursor-glow';document.body.appendChild(glow);
+  let mx=innerWidth/2,my=innerHeight/2,gx=mx,gy=my,active=false;
+  addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;if(!active){active=true;glow.classList.add('active')}},{passive:true});
+  document.addEventListener('mouseleave',()=>{active=false;glow.classList.remove('active')});
+  (function loop(){gx+=(mx-gx)*.14;gy+=(my-gy)*.14;glow.style.transform=`translate(${gx}px,${gy}px) translate(-50%,-50%)`;requestAnimationFrame(loop)})();
+}
+
+// 3D tilt + spotlight on cards, gallery items and quotes
+if(!reduceMotion&&hasHover){
+  $$('.gallery-item,.app-card,.feature-grid>div,.quotes article').forEach(el=>{
+    el.classList.add('tilt');
+    el.addEventListener('mousemove',e=>{
+      const r=el.getBoundingClientRect();
+      const px=(e.clientX-r.left)/r.width, py=(e.clientY-r.top)/r.height;
+      const rx=(py-.5)*-7, ry=(px-.5)*7;
+      el.style.transform=`perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-4px)`;
+      el.style.setProperty('--mx',`${px*100}%`);el.style.setProperty('--my',`${py*100}%`);
+    },{passive:true});
+    el.addEventListener('mouseleave',()=>{el.style.transform=''});
+  });
+}
+
+// Fade images in as they finish loading; fall back gracefully if a source 404s
+$$('img').forEach(img=>{
+  if(img.complete&&img.naturalWidth)img.classList.add('is-loaded');
+  else{
+    img.addEventListener('load',()=>img.classList.add('is-loaded'));
+    img.addEventListener('error',()=>{img.closest('.gallery-item,.discord-orb')?.classList.add('img-fallback');img.style.display='none'});
+  }
+});
 const sections=$$('main section[id]');
 addEventListener('scroll',()=>{
   nav.classList.toggle('scrolled',scrollY>100); $('.back-top').classList.toggle('show',scrollY>700);
@@ -120,15 +161,28 @@ function submitForm(e){
 $$('[data-modal]').forEach(b=>b.addEventListener('click',()=>{if(b.dataset.modal==='rules'){body.innerHTML='<span class="kicker">TOURNAMENT FORMAT</span><h2>EVENT RULES</h2><p>1. Minecraft 1.20+ only.<br>2. No hacked clients, macros or exploit abuse.<br>3. Teaming in solo events is prohibited.<br>4. Respect staff decisions and fellow players.<br>5. Join the event voice channel 15 minutes before start.</p><button class="btn btn-blue" data-register>Accept & register →</button>';modal.showModal();$('[data-register]').onclick=()=>openForm('event')}else openForm(b.dataset.modal)}));
 $('.modal-close',modal).addEventListener('click',()=>modal.close());modal.addEventListener('click',e=>{if(e.target===modal)modal.close()});
 
-// Gallery filters and lightbox
+// Gallery filters and lightbox (with prev/next + keyboard navigation)
 $$('[data-filter]').forEach(b=>b.addEventListener('click',()=>{$$('[data-filter]').forEach(x=>x.classList.toggle('active',x===b));$$('.gallery-item').forEach(x=>x.hidden=!(b.dataset.filter==='all'||x.dataset.type===b.dataset.filter))}));
 const lightbox=$('.lightbox'), lightboxImage=$('.lightbox-image',lightbox);
-$$('.gallery-item').forEach(item=>item.addEventListener('click',()=>{
-  const img=$('img',item);
+let galleryIndex=0;
+function visibleGalleryItems(){return $$('.gallery-item').filter(x=>!x.hidden)}
+function showLightbox(i){
+  const items=visibleGalleryItems(); if(!items.length)return;
+  galleryIndex=(i+items.length)%items.length;
+  const item=items[galleryIndex], img=$('img',item);
   lightboxImage.innerHTML = img ? `<img src="${img.src}" alt="${img.alt||''}">` : '';
   $('h3',lightbox).textContent=$('span',item).textContent.trim();
   lightbox.showModal();
-}));
+}
+$$('.gallery-item').forEach(item=>item.addEventListener('click',()=>showLightbox(visibleGalleryItems().indexOf(item))));
+if(!$('.lightbox-nav',lightbox)){
+  const nav=document.createElement('div'); nav.className='lightbox-nav';
+  nav.innerHTML='<button aria-label="Previous image" data-lb-prev>‹</button><button aria-label="Next image" data-lb-next>›</button>';
+  lightbox.appendChild(nav);
+  $('[data-lb-prev]',nav).addEventListener('click',()=>showLightbox(galleryIndex-1));
+  $('[data-lb-next]',nav).addEventListener('click',()=>showLightbox(galleryIndex+1));
+}
+addEventListener('keydown',e=>{if(lightbox.open){if(e.key==='ArrowLeft')showLightbox(galleryIndex-1);if(e.key==='ArrowRight')showLightbox(galleryIndex+1)}});
 $('.modal-close',lightbox).addEventListener('click',()=>lightbox.close());lightbox.addEventListener('click',e=>{if(e.target===lightbox)lightbox.close()});
 
 // Site search
