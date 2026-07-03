@@ -26,7 +26,7 @@ if(!reduceMotion&&hasHover){
 
 // 3D tilt + spotlight on cards, gallery items and quotes
 if(!reduceMotion&&hasHover){
-  $$('.gallery-item,.app-card,.feature-grid>div,.quotes article').forEach(el=>{
+  $$('.gallery-item,.app-card,.feature-grid>div,.quotes article,.event-main,.champions').forEach(el=>{
     el.classList.add('tilt');
     el.addEventListener('mousemove',e=>{
       const r=el.getBoundingClientRect();
@@ -44,7 +44,7 @@ $$('img').forEach(img=>{
   if(img.complete&&img.naturalWidth)img.classList.add('is-loaded');
   else{
     img.addEventListener('load',()=>img.classList.add('is-loaded'));
-    img.addEventListener('error',()=>{img.closest('.gallery-item,.discord-orb')?.classList.add('img-fallback');img.style.display='none'});
+    img.addEventListener('error',()=>{img.closest('.gallery-item,.discord-orb,.event-art')?.classList.add('img-fallback');img.style.display='none'});
   }
 });
 const sections=$$('main section[id]');
