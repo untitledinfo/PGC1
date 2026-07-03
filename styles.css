@@ -225,3 +225,51 @@ body{background-image:radial-gradient(1200px 600px at 10% -10%,#0a2a1a55,transpa
 @keyframes headShine{from{background-position:120% 0}to{background-position:-20% 0}}
 
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+
+/* ================= News & Posts pages ================= */
+/* Shared by news.html and every posts/post-N.html file so new posts need
+   zero extra CSS — just copy a post file and edit the text. */
+.page-hero{padding:170px 7vw 60px;position:relative;overflow:hidden}
+.page-hero:before{content:"";position:absolute;inset:0;background:radial-gradient(650px circle at 12% 0%,#0aff8714,transparent 60%);pointer-events:none}
+.page-hero h1{font:800 clamp(50px,7vw,90px)/.95 var(--head);letter-spacing:-.03em;margin:14px 0 0;text-transform:uppercase;position:relative;z-index:1}
+.page-hero h1 em{font-style:normal;color:transparent;-webkit-text-stroke:1px #3affa9;text-shadow:0 0 40px #00ff7938}
+.page-hero p{color:var(--muted);max-width:520px;line-height:1.7;font-size:13px;margin:22px 0 0;position:relative;z-index:1}
+.page-hero .legal-updated{color:var(--muted);font-size:12px;margin-top:18px;position:relative;z-index:1}
+.page-toc{display:flex;flex-wrap:wrap;gap:10px;margin:34px 0 0;position:relative;z-index:1}
+.page-toc a{border:1px solid var(--line);background:#ffffff08;padding:9px 14px;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#aac1b4}
+.page-toc a:hover{border-color:#16ff8766;color:#fff}
+
+.news-grid{padding:0 7vw 120px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:900px){.news-grid{grid-template-columns:1fr}}
+.news-card{display:block;padding:32px;background:#0b1a11;border:1px solid var(--line);transition:.3s;position:relative}
+.news-card:hover{transform:translateY(-6px);border-color:#16ff8766}
+.news-date{display:block;font-size:9px;font-weight:800;letter-spacing:.14em;color:#51ffb7;text-transform:uppercase;margin-bottom:16px}
+.news-card h3{font:800 24px/1.15 var(--head);margin:0 0 12px;text-transform:uppercase;color:#fff}
+.news-card p{font-size:12px;color:var(--muted);line-height:1.7;margin:0 0 22px}
+.news-empty{color:var(--muted);font-size:13px;grid-column:1/-1}
+
+.post-article{padding:170px 7vw 120px;max-width:820px}
+.back-link{display:inline-block;margin-bottom:28px}
+.post-article h1{font:800 clamp(34px,4.6vw,54px)/1.1 var(--head);letter-spacing:-.02em;text-transform:uppercase;margin:14px 0 40px;color:#fff}
+.article-body{color:var(--muted);font-size:14px;line-height:1.85}
+.article-body h2,.article-body h3{font-family:var(--head);color:#fff;text-transform:uppercase;letter-spacing:.01em;margin:40px 0 16px}
+.article-body h2{font-size:22px}.article-body h3{font-size:17px}
+.article-body p{margin:0 0 18px}
+.article-body ul,.article-body ol{padding-left:22px;margin:0 0 18px}
+.article-body li{margin-bottom:8px}
+.article-body a{color:var(--blue);text-decoration:underline;text-underline-offset:3px}
+.article-body b,.article-body strong{color:var(--white)}
+.article-body blockquote{border-left:2px solid #16ff8766;margin:0 0 18px;padding:4px 0 4px 20px;color:#aac1b4;font-style:italic}
+.article-body hr{border:0;border-top:1px solid var(--line);margin:32px 0}
+
+/* Legal pages (privacy policy / terms of service) reuse .page-hero above */
+.legal-body{padding:0 7vw 120px;max-width:880px}
+.legal-body h2{font:800 24px var(--head);letter-spacing:.01em;margin:52px 0 16px;text-transform:uppercase;color:#fff}
+.legal-body h2:first-child{margin-top:0}
+.legal-body p{color:var(--muted);line-height:1.85;font-size:14px;margin:0 0 16px}
+.legal-body ul{color:var(--muted);line-height:1.85;font-size:14px;padding-left:20px;margin:0 0 16px}
+.legal-body li{margin-bottom:8px}
+.legal-body b{color:var(--white)}
+.legal-body a{color:var(--blue);text-decoration:underline;text-underline-offset:3px}
+.legal-callout{border:1px solid var(--line);background:#0b1a11;padding:22px 26px;margin:0 0 40px}
+.legal-callout p{margin:0;font-size:13px}
