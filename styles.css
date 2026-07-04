@@ -273,3 +273,31 @@ body{background-image:radial-gradient(1200px 600px at 10% -10%,#0a2a1a55,transpa
 .legal-body a{color:var(--blue);text-decoration:underline;text-underline-offset:3px}
 .legal-callout{border:1px solid var(--line);background:#0b1a11;padding:22px 26px;margin:0 0 40px}
 .legal-callout p{margin:0;font-size:13px}
+
+/* ---- Team section ---- */
+.team{background:#070b11}
+.team-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+.team-card{position:relative;background:#0b1a11;border:1px solid var(--line);overflow:hidden;transition:.3s;box-shadow:0 0 0 rgba(22,255,135,0)}
+.team-card:hover{transform:translateY(-5px);border-color:#16ff8766;box-shadow:0 16px 40px -18px #0ce27a55}
+.team-photo{position:relative;aspect-ratio:1/1;overflow:hidden;background:#0a1810 linear-gradient(150deg,#0f2417,#081209)}
+.team-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;transition:transform .5s var(--ease);opacity:0}
+.team-photo img.is-loaded{opacity:1}
+.team-photo:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,10,18,0) 60%,rgba(5,10,18,.85) 100%);pointer-events:none}
+.team-card:hover .team-photo img{transform:scale(1.08)}
+.team-tag{position:absolute;top:8px;left:8px;z-index:2;background:#050a12d9;backdrop-filter:blur(6px);border:1px solid #ffffff22;padding:3px 7px;font-size:7px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#8fb5a1}
+.team-tag[data-tag="owner"]{color:#ffd166;border-color:#ffd16655}
+.team-tag[data-tag="co-owner"]{color:#ffb84d;border-color:#ffb84d55}
+.team-tag[data-tag="developer"]{color:#55ffba;border-color:#16ff8766}
+.team-tag[data-tag="design"]{color:#7ec8ff;border-color:#7ec8ff55}
+.team-tag[data-tag="staff"]{color:#c9a4ff;border-color:#c9a4ff55}
+.team-info{padding:12px}
+.team-info h3{font:800 13px var(--head);letter-spacing:.01em;margin:0 0 2px;text-transform:uppercase;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.team-title{display:block;font-size:8px;color:#40df92;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.team-grid.visible>.team-card{animation:stagIn .65s var(--ease) both}
+.team-grid.visible>.team-card:nth-child(2){animation-delay:.05s}
+.team-grid.visible>.team-card:nth-child(3){animation-delay:.1s}
+.team-grid.visible>.team-card:nth-child(4){animation-delay:.15s}
+.team-grid.visible>.team-card:nth-child(5){animation-delay:.2s}
+.team-grid.visible>.team-card:nth-child(6){animation-delay:.25s}
+@media(max-width:1000px){.team-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:700px){.team-grid{grid-template-columns:repeat(2,1fr)}}

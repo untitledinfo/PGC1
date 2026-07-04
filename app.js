@@ -47,6 +47,21 @@ $$('img').forEach(img=>{
     img.addEventListener('error',()=>{img.closest('.gallery-item,.discord-orb,.event-art')?.classList.add('img-fallback');img.style.display='none'});
   }
 });
+
+// Team photos: auto-detect a missing/broken image and swap in a generated
+// initials avatar instead of showing a blank box. To use a real photo, just
+// set the img's src attribute in index.html — this only fires when there's
+// no usable image there.
+$$('.team-photo img').forEach(img=>{
+  const useFallback=()=>{
+    const name=(img.dataset.name||img.alt||'PGC').trim();
+    img.src=`https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=0b1a11&color=3affa9&bold=true&size=400&font-size=0.38`;
+  };
+  if(!img.getAttribute('src'))useFallback();
+  img.addEventListener('error',useFallback,{once:true});
+  if(img.complete&&img.naturalWidth)img.classList.add('is-loaded');
+  else img.addEventListener('load',()=>img.classList.add('is-loaded'));
+});
 const sections=$$('main section[id]');
 addEventListener('scroll',()=>{
   nav.classList.toggle('scrolled',scrollY>100); $('.back-top').classList.toggle('show',scrollY>700);
