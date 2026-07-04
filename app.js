@@ -62,6 +62,20 @@ $$('.team-photo img').forEach(img=>{
   if(img.complete&&img.naturalWidth)img.classList.add('is-loaded');
   else img.addEventListener('load',()=>img.classList.add('is-loaded'));
 });
+
+// Hall of Fame champion avatars: same auto-fallback pattern as team photos —
+// drop a real photo/skin-render URL into the <img src=""> in index.html and
+// it's used automatically; otherwise a generated initials avatar shows.
+$$('.champ-photo img').forEach(img=>{
+  const useFallback=()=>{
+    const name=(img.dataset.name||img.alt||'PGC').trim();
+    img.src=`https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=103e26&color=64ffbd&bold=true&size=200&font-size=0.4`;
+  };
+  if(!img.getAttribute('src'))useFallback();
+  img.addEventListener('error',useFallback,{once:true});
+  if(img.complete&&img.naturalWidth)img.classList.add('is-loaded');
+  else img.addEventListener('load',()=>img.classList.add('is-loaded'));
+});
 const sections=$$('main section[id]');
 addEventListener('scroll',()=>{
   nav.classList.toggle('scrolled',scrollY>100); $('.back-top').classList.toggle('show',scrollY>700);
