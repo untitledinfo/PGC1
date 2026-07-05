@@ -24,27 +24,18 @@ if(!reduceMotion&&hasHover){
   (function loop(){gx+=(mx-gx)*.14;gy+=(my-gy)*.14;glow.style.transform=`translate(${gx}px,${gy}px) translate(-50%,-50%)`;requestAnimationFrame(loop)})();
 }
 
-// 3D tilt + spotlight on cards, gallery items and quotes.
-// Rect is measured once on mouseenter (not on every mousemove, which would
-// force a synchronous layout recalculation on each event) and pointer
-// updates are batched to a single write per animation frame.
+// 3D tilt + spotlight on cards, gallery items and quotes
 if(!reduceMotion&&hasHover){
   $$('.gallery-item,.app-card,.feature-grid>div,.quotes article,.event-main,.champions').forEach(el=>{
     el.classList.add('tilt');
-    let rect=null,pendingX=0,pendingY=0,queued=false;
-    function apply(){
-      queued=false; if(!rect)return;
-      const px=(pendingX-rect.left)/rect.width, py=(pendingY-rect.top)/rect.height;
+    el.addEventListener('mousemove',e=>{
+      const r=el.getBoundingClientRect();
+      const px=(e.clientX-r.left)/r.width, py=(e.clientY-r.top)/r.height;
       const rx=(py-.5)*-7, ry=(px-.5)*7;
       el.style.transform=`perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-4px)`;
       el.style.setProperty('--mx',`${px*100}%`);el.style.setProperty('--my',`${py*100}%`);
-    }
-    el.addEventListener('mouseenter',()=>{rect=el.getBoundingClientRect()},{passive:true});
-    el.addEventListener('mousemove',e=>{
-      pendingX=e.clientX;pendingY=e.clientY;
-      if(!queued){queued=true;requestAnimationFrame(apply)}
     },{passive:true});
-    el.addEventListener('mouseleave',()=>{el.style.transform='';rect=null});
+    el.addEventListener('mouseleave',()=>{el.style.transform=''});
   });
 }
 

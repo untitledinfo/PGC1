@@ -30,20 +30,14 @@ if(!reduceMotion&&hasHover){
 if(!reduceMotion&&hasHover){
   $$('.news-card,.app-card,.feature-grid>div').forEach(el=>{
     el.classList.add('tilt');
-    let rect=null,pendingX=0,pendingY=0,queued=false;
-    function apply(){
-      queued=false; if(!rect)return;
-      const px=(pendingX-rect.left)/rect.width, py=(pendingY-rect.top)/rect.height;
+    el.addEventListener('mousemove',e=>{
+      const r=el.getBoundingClientRect();
+      const px=(e.clientX-r.left)/r.width, py=(e.clientY-r.top)/r.height;
       const rx=(py-.5)*-6, ry=(px-.5)*6;
       el.style.transform=`perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-4px)`;
       el.style.setProperty('--mx',`${px*100}%`);el.style.setProperty('--my',`${py*100}%`);
-    }
-    el.addEventListener('mouseenter',()=>{rect=el.getBoundingClientRect()},{passive:true});
-    el.addEventListener('mousemove',e=>{
-      pendingX=e.clientX;pendingY=e.clientY;
-      if(!queued){queued=true;requestAnimationFrame(apply)}
     },{passive:true});
-    el.addEventListener('mouseleave',()=>{el.style.transform='';rect=null});
+    el.addEventListener('mouseleave',()=>{el.style.transform=''});
   });
 }
 

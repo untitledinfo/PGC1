@@ -14,7 +14,7 @@ body::after{content:"";position:fixed;inset:0;z-index:49;pointer-events:none;opa
 .nav{height:94px;padding-inline:clamp(24px,5vw,80px);transition:height .35s,background .35s,border-color .35s}
 .nav.scrolled{height:72px;background:rgba(3,9,6,.78);border-color:rgba(105,255,209,.18);box-shadow:0 18px 50px rgba(0,0,0,.35)}
 .brand-logo{width:48px;height:48px;object-fit:contain;filter:drop-shadow(0 0 14px rgba(57,255,157,.3))}
-.navlinks{padding:7px 10px;border:1px solid rgba(255,255,255,.06);border-radius:999px;background:rgba(255,255,255,.025);backdrop-filter:blur(10px)}
+.navlinks{padding:7px 10px;border:1px solid rgba(255,255,255,.06);border-radius:999px;background:rgba(255,255,255,.025);backdrop-filter:blur(16px)}
 .navlinks a{padding:9px 13px;border-radius:999px;transition:.25s}
 .navlinks a.active,.navlinks a:hover{background:rgba(57,255,157,.1);color:#fff}
 .navlinks a.active:after{display:none}
@@ -42,7 +42,7 @@ body::after{content:"";position:fixed;inset:0;z-index:49;pointer-events:none;opa
 .server .feature-strip{width:auto;max-width:none;margin:clamp(42px,5vw,68px) calc(clamp(24px,7vw,112px) * -1) 0;align-self:end}
 .server .feature-strip>div{min-width:0;padding-block:24px}
 .server .feature-strip b,.server .feature-strip small{overflow-wrap:anywhere}
-.server-panel{background:linear-gradient(145deg,rgba(16,45,28,.92),rgba(5,16,10,.95));backdrop-filter:blur(12px);border-color:rgba(105,255,209,.28)}
+.server-panel{background:linear-gradient(145deg,rgba(16,45,28,.82),rgba(5,16,10,.88));backdrop-filter:blur(22px);border-color:rgba(105,255,209,.28)}
 .panel-tabs button.active{background:rgba(57,255,157,.08)}
 .ip-box{border-radius:12px;overflow:hidden;background:rgba(0,0,0,.18)}
 .team{padding-top:clamp(76px,6vw,96px)}
@@ -61,13 +61,12 @@ body::after{content:"";position:fixed;inset:0;z-index:49;pointer-events:none;opa
 .quotes article.featured{border-color:rgba(57,255,157,.45);box-shadow:0 28px 70px rgba(0,0,0,.48),0 0 55px rgba(57,255,157,.08)}
 .discord{background:radial-gradient(circle at 15% 50%,rgba(57,255,157,.2),transparent 22rem),linear-gradient(120deg,#07532e,#0bbd65 55%,#078348)}
 .discord-orb{animation:premiumFloat 5s ease-in-out infinite;filter:drop-shadow(0 25px 45px rgba(0,0,0,.38))}
-.reveal{transform:translateY(38px) scale(.985);transition:opacity .5s ease,transform .5s cubic-bezier(.2,.8,.2,1);will-change:opacity,transform}
-.reveal.visible{transform:none}
+.reveal{transform:translateY(38px) scale(.985);filter:blur(5px);transition:opacity .85s ease,transform .85s cubic-bezier(.2,.8,.2,1),filter .85s}
+.reveal.visible{transform:none;filter:none}
 .reveal-stagger>*{opacity:0;transform:translateY(24px);animation:cardIn .65s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:calc(var(--i) * 80ms)}
 @keyframes cardIn{to{opacity:1;transform:none}}@keyframes premiumFloat{50%{transform:translateY(-14px) rotate(2deg)}}
 @media (max-width:1400px){.team-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media (max-width:1200px){.navlinks{gap:4px}.navlinks a{padding-inline:10px}}
 @media (max-width:900px){.navlinks{border-radius:0;padding:22px}.hero{min-height:720px}.section-head{gap:20px}.event-grid{border-radius:18px}.event-art{border-radius:18px 18px 0 0}.feature-grid{gap:10px}.server .feature-strip{grid-template-columns:repeat(3,minmax(0,1fr))}.server .feature-strip>div:nth-child(4),.server .feature-strip>div:nth-child(5){border-top:1px solid var(--line)}}
 @media (max-width:600px){.hero h1{font-size:clamp(58px,18vw,82px)}.hero-actions{align-items:stretch}.btn{min-height:54px}.announcement{box-shadow:none}.section{padding-inline:20px}.event-grid,.server-panel,.app-card,.team-card,.quotes article{border-radius:16px}.server{padding-inline:20px}.server .feature-strip{margin-inline:-20px;grid-template-columns:repeat(2,minmax(0,1fr))}.team-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.team{padding-top:72px}}
-@media (max-width:900px){.navlinks,.server-panel,.nav.scrolled{backdrop-filter:none}.nav.scrolled{background:rgba(3,9,6,.94)}.server-panel{background:linear-gradient(145deg,rgba(16,45,28,.97),rgba(5,16,10,.98))}}
-@media (prefers-reduced-motion:reduce){.discord-orb,.hero-bg,.particles{animation:none}.reveal-stagger>*{animation:none;opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.discord-orb,.hero-bg,.particles{animation:none}.reveal{filter:none}.reveal-stagger>*{animation:none;opacity:1;transform:none}}

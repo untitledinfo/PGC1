@@ -9,42 +9,35 @@
   </url>
 
   <url>
-    <loc>https://pgcmc.fun/news</loc>
+    <loc>https://pgcmc.fun/news.html</loc>
     <lastmod>2026-06-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://pgcmc.fun/posts/post-1</loc>
+    <loc>https://pgcmc.fun/posts/post-1.html</loc>
     <lastmod>2026-06-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://pgcmc.fun/posts/post-2</loc>
+    <loc>https://pgcmc.fun/posts/post-2.html</loc>
     <lastmod>2026-06-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://pgcmc.fun/posts/post-3</loc>
-    <lastmod>2026-07-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-
-  <url>
-    <loc>https://pgcmc.fun/privacy-policy</loc>
+    <loc>https://pgcmc.fun/privacy-policy.html</loc>
     <lastmod>2026-07-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
 
   <url>
-    <loc>https://pgcmc.fun/terms-of-service</loc>
+    <loc>https://pgcmc.fun/terms-of-service.html</loc>
     <lastmod>2026-07-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
