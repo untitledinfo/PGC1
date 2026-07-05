@@ -1,94 +1,36 @@
-# 🇵🇰 Pakistan Gamers Community (PGC)
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-> Pakistan's home for competitive gaming, Minecraft, tournaments, and an amazing gaming community.
+## Getting Started
 
-🌐 **Website:** https://pgcmc.fun
-🎮 **Minecraft IP:** `play.pgcmc.fun`
-🔌 **Port:** `25568`
-💬 **Discord:** https://discord.gg/qnHJZddjTW
+First, run the development server:
 
----
-
-## 🌟 About
-
-Pakistan Gamers Community (PGC) is one of Pakistan's growing gaming communities, bringing together Minecraft players and gamers from across the country.
-
-Our goal is to create a friendly, competitive, and active environment where everyone can enjoy events, tournaments, giveaways, and custom Minecraft gameplay.
-
----
-
-## ⚔️ Warrior Lifesteal SMP
-
-Experience one of Pakistan's most competitive Minecraft Lifesteal servers.
-
-### Features
-
-* ❤️ Lifesteal System
-* ⚔️ Competitive PvP
-* 📦 Custom Crates
-* 🏠 Base Building
-* 🔄 Weekly Updates
-* 🌍 Java & Bedrock Crossplay
-* ⚡ Low Latency
-* 🛡️ DDoS Protection
-* 📊 Leaderboards
-* 🎉 Community Events
-
-**Server Address**
-
-```text
-IP: play.pgcmc.fun
-Port: 25568
-Version: 1.20+
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
----
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## 🏆 Community
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-PGC regularly hosts:
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-* Minecraft Tournaments
-* Cash Prize Events
-* Giveaways
-* Community Nights
-* Discord Activities
-* Creator Events
+## Learn More
 
----
+To learn more about Next.js, take a look at the following resources:
 
-## 👥 Join Our Team
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-We're always looking for talented people.
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-* 🛡️ Staff Team
-* 💻 Developers
-* 🎥 Content Creators
-* 🎨 Graphic Designers
+## Deploy on Vercel
 
-Apply through our website or Discord.
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
----
-
-## 🔗 Links
-
-* 🌐 Website: https://pgcmc.fun
-* 💬 Discord: https://discord.gg/qnHJZddjTW
-
----
-
-## ❤️ Support
-
-If you enjoy our community, consider:
-
-* Joining our Discord
-* Playing on our server
-* Inviting your friends
-* Participating in events
-* Sharing PGC with other gamers
-
----
-
-## 📜 License
-
-© 2026 Pakistan Gamers Community. All Rights Reserved.
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

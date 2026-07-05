@@ -47,6 +47,35 @@ $$('img').forEach(img=>{
     img.addEventListener('error',()=>{img.closest('.gallery-item,.discord-orb,.event-art')?.classList.add('img-fallback');img.style.display='none'});
   }
 });
+
+// Team photos: auto-detect a missing/broken image and swap in a generated
+// initials avatar instead of showing a blank box. To use a real photo, just
+// set the img's src attribute in index.html — this only fires when there's
+// no usable image there.
+$$('.team-photo img').forEach(img=>{
+  const useFallback=()=>{
+    const name=(img.dataset.name||img.alt||'PGC').trim();
+    img.src=`https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=0b1a11&color=3affa9&bold=true&size=400&font-size=0.38`;
+  };
+  if(!img.getAttribute('src'))useFallback();
+  img.addEventListener('error',useFallback,{once:true});
+  if(img.complete&&img.naturalWidth)img.classList.add('is-loaded');
+  else img.addEventListener('load',()=>img.classList.add('is-loaded'));
+});
+
+// Hall of Fame champion avatars: same auto-fallback pattern as team photos —
+// drop a real photo/skin-render URL into the <img src=""> in index.html and
+// it's used automatically; otherwise a generated initials avatar shows.
+$$('.champ-photo img').forEach(img=>{
+  const useFallback=()=>{
+    const name=(img.dataset.name||img.alt||'PGC').trim();
+    img.src=`https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=103e26&color=64ffbd&bold=true&size=200&font-size=0.4`;
+  };
+  if(!img.getAttribute('src'))useFallback();
+  img.addEventListener('error',useFallback,{once:true});
+  if(img.complete&&img.naturalWidth)img.classList.add('is-loaded');
+  else img.addEventListener('load',()=>img.classList.add('is-loaded'));
+});
 const sections=$$('main section[id]');
 addEventListener('scroll',()=>{
   nav.classList.toggle('scrolled',scrollY>100); $('.back-top').classList.toggle('show',scrollY>700);
@@ -55,10 +84,10 @@ addEventListener('scroll',()=>{
 },{passive:true});
 $('.back-top').addEventListener('click',()=>scrollTo({top:0,behavior:'smooth'}));
 
-// Countdown lands on the next Sunday at 8 PM PKT — recomputed each tick so it
+// Countdown lands on the next Sunday at 12 PM PKT — recomputed each tick so it
 // automatically rolls to the following week once the current event starts
 // (previously it froze at 00:00:00 until the page was reloaded).
-function nextEvent(){const now=new Date(), target=new Date(now); target.setHours(20,0,0,0); const add=(7-now.getDay())%7;if(add===0&&now>=target)target.setDate(target.getDate()+7);else target.setDate(target.getDate()+add);return target}
+function nextEvent(){const now=new Date(), target=new Date(now); target.setHours(12,0,0,0); const add=(7-now.getDay())%7;if(add===0&&now>=target)target.setDate(target.getDate()+7);else target.setDate(target.getDate()+add);return target}
 function tick(){let n=Math.max(0,nextEvent()-Date.now());const d=Math.floor(n/864e5);n%=864e5;const h=Math.floor(n/36e5);n%=36e5;const m=Math.floor(n/6e4);$$('[data-days]').forEach(x=>x.textContent=String(d).padStart(2,'0'));$$('[data-hours]').forEach(x=>x.textContent=String(h).padStart(2,'0'));$$('[data-minutes]').forEach(x=>x.textContent=String(m).padStart(2,'0'))} tick();setInterval(tick,30000);
 
 // Server panel and clipboard
