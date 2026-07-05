@@ -84,10 +84,10 @@ addEventListener('scroll',()=>{
 },{passive:true});
 $('.back-top').addEventListener('click',()=>scrollTo({top:0,behavior:'smooth'}));
 
-// Countdown lands on the next Sunday at 8 PM PKT — recomputed each tick so it
+// Countdown lands on the next Sunday at 12 PM PKT — recomputed each tick so it
 // automatically rolls to the following week once the current event starts
 // (previously it froze at 00:00:00 until the page was reloaded).
-function nextEvent(){const now=new Date(), target=new Date(now); target.setHours(20,0,0,0); const add=(7-now.getDay())%7;if(add===0&&now>=target)target.setDate(target.getDate()+7);else target.setDate(target.getDate()+add);return target}
+function nextEvent(){const now=new Date(), target=new Date(now); target.setHours(12,0,0,0); const add=(7-now.getDay())%7;if(add===0&&now>=target)target.setDate(target.getDate()+7);else target.setDate(target.getDate()+add);return target}
 function tick(){let n=Math.max(0,nextEvent()-Date.now());const d=Math.floor(n/864e5);n%=864e5;const h=Math.floor(n/36e5);n%=36e5;const m=Math.floor(n/6e4);$$('[data-days]').forEach(x=>x.textContent=String(d).padStart(2,'0'));$$('[data-hours]').forEach(x=>x.textContent=String(h).padStart(2,'0'));$$('[data-minutes]').forEach(x=>x.textContent=String(m).padStart(2,'0'))} tick();setInterval(tick,30000);
 
 // Server panel and clipboard
