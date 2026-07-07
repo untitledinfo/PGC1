@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>PGC Admin — Applications</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+  <!-- LOGIN -->
+  <section id="loginView" class="login-wrap">
+    <form id="loginForm" class="login-card" autocomplete="off">
+      <span class="kicker">PGC ADMIN</span>
+      <h1>Sign in</h1>
+      <p class="muted">Applications &amp; database control panel.</p>
+      <label>EMAIL
+        <input type="email" id="loginEmail" name="email" required placeholder="admin@gmail.com" autocomplete="username">
+      </label>
+      <label>PASSWORD
+        <input type="password" id="loginPassword" name="password" required placeholder="••••••••" autocomplete="current-password">
+      </label>
+      <button class="btn btn-blue btn-wide" type="submit">Sign in →</button>
+      <p class="error" id="loginError" hidden></p>
+    </form>
+  </section>
+
+  <!-- DASHBOARD -->
+  <section id="dashboardView" class="dash" hidden>
+    <header class="dash-top">
+      <div class="brand"><span class="dot" id="liveDot"></span><b>PGC ADMIN</b><small>Applications database</small></div>
+      <div class="dash-actions">
+        <span class="who" id="whoAmI"></span>
+        <button class="btn btn-ghost btn-sm" id="logoutBtn">Log out</button>
+      </div>
+    </header>
+
+    <div class="stats-row" id="statsRow">
+      <div class="stat-card"><b id="statTotal">–</b><span>TOTAL</span></div>
+      <div class="stat-card pending"><b id="statPending">–</b><span>PENDING</span></div>
+      <div class="stat-card approved"><b id="statApproved">–</b><span>APPROVED</span></div>
+      <div class="stat-card rejected"><b id="statRejected">–</b><span>REJECTED</span></div>
+      <div class="stat-card"><b id="stat24h">–</b><span>LAST 24H</span></div>
+    </div>
+
+    <div class="toolbar">
+      <div class="tabs" id="statusTabs">
+        <button data-status="all" class="active">All</button>
+        <button data-status="pending">Pending</button>
+        <button data-status="approved">Approved</button>
+        <button data-status="rejected">Rejected</button>
+      </div>
+      <select id="typeFilter">
+        <option value="all">All types</option>
+        <option value="Staff">Staff</option>
+        <option value="Developer">Developer</option>
+        <option value="Creator">Creator</option>
+        <option value="Event">Event</option>
+      </select>
+      <input type="search" id="searchBox" placeholder="Search name, email, discord…">
+      <button class="btn btn-ghost btn-sm" id="refreshBtn">Refresh</button>
+    </div>
+
+    <div class="table-wrap">
+      <table id="appsTable">
+        <thead>
+          <tr>
+            <th>Type</th><th>Applicant</th><th>Discord</th><th>Age</th><th>Message</th><th>Submitted</th><th>Status</th><th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="appsBody"></tbody>
+      </table>
+      <p class="empty" id="emptyState" hidden>No applications match these filters.</p>
+    </div>
+  </section>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <dialog class="confirm-dialog" id="confirmDialog">
+    <p id="confirmText"></p>
+    <textarea id="confirmReason" placeholder="Optional reason (sent in the email)…" hidden></textarea>
+    <div class="confirm-actions">
+      <button class="btn btn-ghost btn-sm" id="confirmCancel">Cancel</button>
+      <button class="btn btn-blue btn-sm" id="confirmOk">Confirm</button>
+    </div>
+  </dialog>
+
+  <script src="admin.js"></script>
+</body>
+</html>

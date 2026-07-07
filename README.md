@@ -89,6 +89,20 @@ If you enjoy our community, consider:
 
 ---
 
+## 🛠️ Admin Panel & Applications Database
+
+Staff/Developer/Creator applications now go into a real database with a secure admin panel — see [`server/README.md`](server/README.md) for full setup and deployment steps. Highlights:
+
+* 🔐 Admin login (hashed password, signed session cookies, rate-limited)
+* 📊 Live dashboard — stats, filters, search, real-time updates (no refresh needed)
+* ✅ One-click Approve / Reject — applicant gets an automatic email
+* 🗄️ SQLite database, parameterized queries, CORS-locked API
+* ⚙️ GitHub Actions CI (`.github/workflows/ci.yml`) checks the server on every push
+
+Since GitHub Pages only serves static files, the admin backend is deployed separately (Render/Railway/VPS) — instructions are in `server/README.md`.
+
+---
+
 ## 📜 License
 
 © 2026 Pakistan Gamers Community. All Rights Reserved.
