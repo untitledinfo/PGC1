@@ -162,19 +162,15 @@ const data={
   developer:{eyebrow:'PGC APPLICATIONS',title:'BUILD THE NETWORK',desc:'Show us the technical craft you want to bring to Warrior Network.',role:'Primary skill',type:'Developer'},
   creator:{eyebrow:'CREATOR PROGRAM',title:'CREATE WITH PGC',desc:'Apply for creator support, promotion and exclusive community access.',role:'Channel / platform',type:'Creator'}
 };
-function openForm(kind){const x=data[kind];body.innerHTML=`<span class="kicker">${x.eyebrow}</span><h2>${x.title}</h2><p>${x.desc}</p><form data-kind="${x.type}"><label>FULL NAME<input name="name" required placeholder="Your name"></label><label>EMAIL<input name="email" required type="email" placeholder="you@email.com"></label><label>DISCORD USERNAME<input name="discord" required placeholder="username"></label><label>${x.role.toUpperCase()}<input name="role" required placeholder="Tell us here"></label><label>AGE<input name="age" required type="number" min="13" placeholder="13+"></label><label class="full">WHY PGC?<textarea name="message" required placeholder="A short, honest answer works best."></textarea></label><button class="btn btn-blue" type="submit">Submit ${x.type} application →</button></form>`;modal.showModal();$('form',body).addEventListener('submit',submitForm)}
+function openForm(kind){const x=data[kind];body.innerHTML=`<span class="kicker">${x.eyebrow}</span><h2>${x.title}</h2><p>${x.desc}</p><form data-kind="${x.type}"><label>FULL NAME<input name="name" required placeholder="Your name"></label><label>DISCORD USERNAME<input name="discord" required placeholder="username"></label><label>${x.role.toUpperCase()}<input name="role" required placeholder="Tell us here"></label><label>AGE<input name="age" required type="number" min="13" placeholder="13+"></label><label class="full">WHY PGC?<textarea name="message" required placeholder="A short, honest answer works best."></textarea></label><button class="btn btn-blue" type="submit">Submit ${x.type} application →</button></form>`;modal.showModal();$('form',body).addEventListener('submit',submitForm)}
 
-// Submits the application to the PGC admin database (see /server). The record
-// shows up live in the admin panel, and applicants get an email automatically
-// when staff click Approve/Reject. Update PGC_API_BASE once the backend is
-// deployed (Render/Railway/VPS — see server/README.md).
-const PGC_API_BASE='https://api.pgcmc.fun';
-
+// Submits locally (for the "My Applications" style lookups) AND emails the entry
+// automatically to farhanbluetick@gmail.com via FormSubmit's AJAX endpoint.
 function submitForm(e){
   e.preventDefault();
   const form=e.currentTarget, entries=Object.fromEntries(new FormData(form)), kind=form.dataset.kind;
 
-  // Keep a local record too, so nothing is lost even if the network request fails.
+  // Keep the local record so nothing is lost even if the network request fails.
   const saved=JSON.parse(localStorage.getItem('pgc-submissions')||'[]');
   saved.push({...entries,type:kind,date:new Date().toISOString()});
   localStorage.setItem('pgc-submissions',JSON.stringify(saved));
@@ -182,22 +178,22 @@ function submitForm(e){
   const btn=$('button[type="submit"]',form), original=btn.textContent;
   btn.disabled=true; btn.textContent='Sending…';
 
-  fetch(`${PGC_API_BASE}/api/applications`,{
+  fetch('https://formsubmit.co/ajax/farhanbluetick@gmail.com',{
     method:'POST',
-    headers:{'Content-Type':'application/json'},
+    headers:{'Content-Type':'application/json',Accept:'application/json'},
     body:JSON.stringify({
-      type:kind,
+      _subject:`New ${kind} application — PGC`,
+      application_type:kind,
       name:entries.name,
-      email:entries.email,
       discord:entries.discord,
       role:entries.role,
       age:entries.age,
       message:entries.message
     })
   })
-  .then(async r=>{if(!r.ok){const d=await r.json().catch(()=>({}));throw new Error(d.error||'bad response')}return r.json()})
+  .then(r=>{if(!r.ok)throw new Error('bad response');return r.json()})
   .then(()=>{modal.close();toast('Application received — welcome to the next level!')})
-  .catch(()=>{modal.close();toast('Saved locally — we’ll follow up, or reach us on Discord.')})
+  .catch(()=>{modal.close();toast('Saved locally — email notification failed, we’ll still review it.')})
   .finally(()=>{btn.disabled=false;btn.textContent=original});
 }
 
