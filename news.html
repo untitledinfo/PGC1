@@ -19,6 +19,13 @@
   <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/untitledinfo/PGC1/main/logo.png">
   <link rel="stylesheet" href="styles.css">
   <script defer src="site.js"></script>
+  <style>
+    /* Rounded-corner design pass for news cards + buttons */
+    .news-card{border-radius:var(--radius);overflow:hidden}
+    .news-card:hover{box-shadow:0 18px 46px #16ff8722}
+    .btn{border-radius:var(--radius)}
+    .btn-sm{border-radius:calc(var(--radius) - 4px)}
+  </style>
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
@@ -66,6 +73,12 @@
     <span class="news-date">July 4, 2026</span>
     <h3>🏆 PGC Sunday Build Battle Tournament Registration Is NOW OPEN!</h3>
     <p>Join the Sunday Build Battle Tournament and compete for Rs. 10,000, an Official Minecraft Account, and Discord Nitro.</p>
+    <span class="text-link">Read more →</span>
+    </a>
+      <a class="news-card" href="posts/post-4">
+    <span class="news-date">July 23, 2026</span>
+    <h3>🚀 PGC Host Is Now Live — Rent Your Own Minecraft Server!</h3>
+    <p>PGC's new Minecraft server hosting service is officially live. Fast, DDoS-protected, and backed by the PGC team — rent your own server today.</p>
     <span class="text-link">Read more →</span>
     </a>
     </section>
