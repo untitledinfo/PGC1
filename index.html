@@ -36,6 +36,11 @@
     .btn-sm{border-radius:calc(var(--radius) - 4px)}
     .back-top{border-radius:50%}
     .app-card{border-radius:var(--radius);overflow:hidden}
+    .host-float{position:fixed;right:74px;bottom:20px;width:42px;height:42px;
+      border:1px solid #2b5e43;background:#091b11;color:#59ffb9;z-index:20;
+      display:grid;place-items:center;text-decoration:none;font-size:9px;
+      font-weight:800;letter-spacing:.03em;border-radius:50%;transition:.25s}
+    .host-float:hover{border-color:#16ff87;background:#16ff8718;transform:translateY(-2px)}
   </style>
 </head>
 <body>
@@ -48,6 +53,7 @@
     </nav>
     <div class="nav-actions">
       <button class="icon-btn search-toggle" aria-label="Open search"><svg><use href="#i-search"/></svg></button>
+      <a class="btn btn-sm btn-ghost" href="https://web.pgcmc.fun" target="_blank" rel="noreferrer">PGC Host <span>↗</span></a>
       <a class="btn btn-sm btn-blue" href="#discord">Join Discord <span>↗</span></a>
       <button class="menu" aria-controls="navlinks" aria-expanded="false" aria-label="Toggle menu"><span></span><span></span></button>
     </div>
@@ -233,8 +239,9 @@
     <section class="discord" id="discord"><div class="discord-orb"><img src="https://raw.githubusercontent.com/untitledinfo/PGC1/main/logo.png" alt="PGC logo"></div><div class="reveal"><span class="kicker">THE CONVERSATION NEVER STOPS</span><h2>YOUR NEXT SQUAD<br>IS <em>WAITING.</em></h2><p>Tournaments, giveaways, support, updates, voice chat—and thousands of Pakistani gamers who get it.</p><a class="btn btn-white" href="https://discord.gg/qnHJZddjTW" target="_blank" rel="noreferrer"><svg><use href="#i-discord"/></svg> Join the PGC Discord ↗</a></div><div class="discord-widget reveal" id="discordWidget"><div class="widget-head"><div><span class="live-dot" id="discordLiveDot"></span><b>PAKISTAN GAMERS COMMUNITY</b></div><small>discord.gg/qnHJZddjTW</small></div><div class="widget-stats"><span><b id="widgetMemberCount">–</b><small>MEMBERS</small></span><span><b id="widgetOnlineCount">–</b><small>ONLINE NOW</small></span></div><div class="online-list" id="onlineList"><span><i></i>Loading live members <small>Connecting to Discord…</small></span></div></div></section>
   </main>
 
-  <footer><div class="footer-brand"><a class="brand" href="#top"><img class="brand-logo" src="https://raw.githubusercontent.com/untitledinfo/PGC1/main/logo.png" width="1000" height="1000" alt="PGC logo"><span>PGC<small>Pakistan Gamers</small></span></a><p>Pakistan's home for competitive gaming, Minecraft and community.</p></div><div><b>EXPLORE</b><a href="#event">Events</a><a href="#server">Servers</a><a href="#team">Team</a><a href="#gallery">Gallery</a><a href="#faq">Support</a></div><div><b>COMMUNITY</b><a href="#applications">Applications</a><a href="#discord">Discord</a><a href="#leaderboard">Leaderboards</a><a href="news">News</a></div><div><b>LEGAL</b><a href="privacy-policy">Privacy Policy</a><a href="terms-of-service">Terms of Service</a><a href="#faq">Server Rules</a></div><div class="footer-bottom"><span>© 2026 Pakistan Gamers Community. All rights reserved.</span><span>Made with ♥ in Pakistan 🇵🇰</span></div></footer>
+  <footer><div class="footer-brand"><a class="brand" href="#top"><img class="brand-logo" src="https://raw.githubusercontent.com/untitledinfo/PGC1/main/logo.png" width="1000" height="1000" alt="PGC logo"><span>PGC<small>Pakistan Gamers</small></span></a><p>Pakistan's home for competitive gaming, Minecraft and community.</p></div><div><b>EXPLORE</b><a href="#event">Events</a><a href="#server">Servers</a><a href="#team">Team</a><a href="#gallery">Gallery</a><a href="#faq">Support</a></div><div><b>COMMUNITY</b><a href="#applications">Applications</a><a href="#discord">Discord</a><a href="#leaderboard">Leaderboards</a><a href="news">News</a></div><div><b>LEGAL</b><a href="privacy-policy">Privacy Policy</a><a href="terms-of-service">Terms of Service</a><a href="#faq">Server Rules</a></div><div class="footer-bottom"><span>© 2026 Pakistan Gamers Community. All rights reserved.</span><span>Powered by <a href="https://web.pgcmc.fun" target="_blank" rel="noreferrer" style="color:#59ffb9;font-weight:800">PGC Host</a></span><span>Made with ♥ in Pakistan 🇵🇰</span></div></footer>
 
+  <a class="host-float" href="https://web.pgcmc.fun" target="_blank" rel="noreferrer" aria-label="PGC Host">HOST</a>
   <button class="back-top" aria-label="Back to top">↑</button>
   <div class="toast" role="status" aria-live="polite"></div>
   <div class="search-overlay" aria-hidden="true"><button class="search-close" aria-label="Close search">×</button><form><label for="site-search">SEARCH PGC</label><input id="site-search" type="search" placeholder="Events, server, applications…" autocomplete="off"><div class="search-results"></div></form></div>
